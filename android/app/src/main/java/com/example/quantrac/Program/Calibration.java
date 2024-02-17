@@ -4,9 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 
 import com.example.quantrac.COD_BOD_Module.SdkCodBodModule;
-import com.example.quantrac.Nh4module.SdkNh4Module;
 import com.example.quantrac.PHModule.SdkPHModule;
-import com.example.quantrac.TSSModule.SdkTSSModule;
 
 import java.util.List;
 import java.util.TimerTask;
@@ -28,90 +26,117 @@ public class Calibration {
                 mTimerHandler.post(new Runnable() {
                     @Override
                     public void run() {
-
-                        //calibration pH zero
-                        if(Globals.pHZero){
+                        //PH1
+                        //calibration pH1 zero
+                        if(Globals.pH1Zero){
                             SdkPHModule PHSdk = new SdkPHModule();
                             List<DeviceInfo> devices = SDKLocker.getAllUsbDevicesHasDriver(context);
                             for (DeviceInfo each : devices) {
                                 boolean connect = PHSdk.connect(context, each, 9600);
                                 if (connect) {
-                                //    PHSdk.calibrationZero();
+                                    PHSdk.calibration1Zero();
                                 }
                             }
                         }
 
-                        //calibration pH slope low
-                        if(Globals.pHSlopeLo){
+                        //calibration pH1 slope low
+                        if(Globals.pH1SlopeLo){
                             SdkPHModule PHSdk = new SdkPHModule();
                             List<DeviceInfo> devices = SDKLocker.getAllUsbDevicesHasDriver(context);
                             for (DeviceInfo each : devices) {
                                 boolean connect = PHSdk.connect(context, each, 9600);
                                 if (connect) {
-                                //    PHSdk.calibrationSlopeLow();
+                                    PHSdk.calibration1SlopeLow();
                                 }
                             }
                         }
 
-                        //calibration pH slope hi
-                        if(Globals.pHSlopeHi){
+                        //calibration pH1 slope hi
+                        if(Globals.pH1SlopeHi){
                             SdkPHModule PHSdk = new SdkPHModule();
                             List<DeviceInfo> devices = SDKLocker.getAllUsbDevicesHasDriver(context);
                             for (DeviceInfo each : devices) {
                                 boolean connect = PHSdk.connect(context, each, 9600);
                                 if (connect) {
-                                //    PHSdk.calibrationSlopeHigh();
+                                    PHSdk.calibration1SlopeHigh();
                                 }
                             }
                         }
 
-                        //calibration nh4 zero
-                        if(Globals.nh4Zero){
-                            SdkNh4Module NH4Sdk = new SdkNh4Module();
+                        //PH2
+                        //calibration pH2 zero
+                        if(Globals.pH2Zero){
+                            SdkPHModule PHSdk = new SdkPHModule();
                             List<DeviceInfo> devices = SDKLocker.getAllUsbDevicesHasDriver(context);
                             for (DeviceInfo each : devices) {
-                                boolean connect = NH4Sdk.connect(context, each, 9600);
+                                boolean connect = PHSdk.connect(context, each, 9600);
                                 if (connect) {
-                                //    NH4Sdk.calibrationNH4Zero();
+                                    PHSdk.calibration2Zero();
                                 }
                             }
                         }
 
-                        //calibration nh4 slope
-                        if(Globals.nh4Slope){
-                            SdkNh4Module NH4Sdk = new SdkNh4Module();
+                        //calibration pH2 slope low
+                        if(Globals.pH2SlopeLo){
+                            SdkPHModule PHSdk = new SdkPHModule();
                             List<DeviceInfo> devices = SDKLocker.getAllUsbDevicesHasDriver(context);
                             for (DeviceInfo each : devices) {
-                                boolean connect = NH4Sdk.connect(context, each, 9600);
+                                boolean connect = PHSdk.connect(context, each, 9600);
                                 if (connect) {
-                                //    NH4Sdk.calibrationNH4Slope();
+                                    PHSdk.calibration2SlopeLow();
                                 }
                             }
                         }
 
-                        //calibration tss zero
-                        if(Globals.tssZero){
-                            SdkTSSModule TssSdk = new SdkTSSModule();
+                        //calibration pH2 slope hi
+                        if(Globals.pH2SlopeHi){
+                            SdkPHModule PHSdk = new SdkPHModule();
                             List<DeviceInfo> devices = SDKLocker.getAllUsbDevicesHasDriver(context);
                             for (DeviceInfo each : devices) {
-                                boolean connect = TssSdk.connect(context, each, 9600);
+                                boolean connect = PHSdk.connect(context, each, 9600);
                                 if (connect) {
-//                                    TssSdk.calibrationZero();
+                                    PHSdk.calibration2SlopeHigh();
                                 }
                             }
                         }
 
-                        //calibration tss slope
-                        if(Globals.tssSlope){
-                            SdkTSSModule TssSdk = new SdkTSSModule();
+                        //PH3
+                        //calibration pH3 zero
+                        if(Globals.pH3Zero){
+                            SdkPHModule PHSdk = new SdkPHModule();
                             List<DeviceInfo> devices = SDKLocker.getAllUsbDevicesHasDriver(context);
                             for (DeviceInfo each : devices) {
-                                boolean connect = TssSdk.connect(context, each, 9600);
+                                boolean connect = PHSdk.connect(context, each, 9600);
                                 if (connect) {
-//                                    TssSdk.calibrationSlope();
+                                    PHSdk.calibration3Zero();
                                 }
                             }
                         }
+
+                        //calibration pH3 slope low
+                        if(Globals.pH3SlopeLo){
+                            SdkPHModule PHSdk = new SdkPHModule();
+                            List<DeviceInfo> devices = SDKLocker.getAllUsbDevicesHasDriver(context);
+                            for (DeviceInfo each : devices) {
+                                boolean connect = PHSdk.connect(context, each, 9600);
+                                if (connect) {
+                                    PHSdk.calibration3SlopeLow();
+                                }
+                            }
+                        }
+
+                        //calibration pH3 slope hi
+                        if(Globals.pH3SlopeHi){
+                            SdkPHModule PHSdk = new SdkPHModule();
+                            List<DeviceInfo> devices = SDKLocker.getAllUsbDevicesHasDriver(context);
+                            for (DeviceInfo each : devices) {
+                                boolean connect = PHSdk.connect(context, each, 9600);
+                                if (connect) {
+                                    PHSdk.calibration3SlopeHigh();
+                                }
+                            }
+                        }
+
 
                         //calibration cod sensor to default factory
                         if(Globals.codDefault){
@@ -120,7 +145,7 @@ public class Calibration {
                             for (DeviceInfo each : devices) {
                                 boolean connect = CODSdk.connect(context, each, 9600);
                                 if (connect) {
-                                //    CODSdk.calibrationCODDefault();
+                                    CODSdk.calibrationCODDefault();
                                 }
                             }
                         }
@@ -144,7 +169,7 @@ public class Calibration {
                             for (DeviceInfo each : devices) {
                                 boolean connect = CODSdk.connect(context, each, 9600);
                                 if (connect) {
-                                //    CODSdk.calibrationCOD();
+                                    CODSdk.calibrationCOD();
                                 }
                             }
                         }

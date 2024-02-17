@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quantrac_online_hongphat/common/simple_appbar.dart';
 import 'package:quantrac_online_hongphat/view/calibartion_screen/calibration_cod.dart';
-import 'package:quantrac_online_hongphat/view/calibartion_screen/calibration_ph.dart';
+import 'package:quantrac_online_hongphat/view/calibartion_screen/calibration_ph1.dart';
+import 'package:quantrac_online_hongphat/view/calibartion_screen/calibration_ph2.dart';
+import 'package:quantrac_online_hongphat/view/calibartion_screen/calibration_ph3.dart';
 import 'package:quantrac_online_hongphat/view/calibartion_screen/calibration_tss.dart';
 import '../../services/homepage_service.dart';
 
@@ -35,14 +37,14 @@ class _CalibrationState extends State<Calibration> {
                   width: 1365 / sizeDevice,
                   child: Column(
                     children: [
-                      Container(
+                      SizedBox(
                         height: 85 / sizeDevice,
                         width: 1365 / sizeDevice,
                         child: Row(
                           children: [
-                            //Hiệu chuẩn đầu đo pH
+                            //Hiệu chuẩn đầu đo pH1
                             SizedBox(
-                              width: 340 / sizeDevice,
+                              width: 273 / sizeDevice,
                               height: 90 / sizeDevice,
                               child: Column(children: [
                                 SizedBox(height: 24 / sizeDevice),
@@ -53,7 +55,7 @@ class _CalibrationState extends State<Calibration> {
                                     });
                                   },
                                   child: Text(
-                                    "Đầu đo pH",
+                                    "Đầu đo pH1",
                                     style: TextStyle(
                                         fontSize: 34 / sizeDevice,
                                         fontWeight: FontWeight.bold,
@@ -76,9 +78,9 @@ class _CalibrationState extends State<Calibration> {
                                     : Container()
                               ]),
                             ),
-                            //Hiệu chuẩn cod, bod
+                            //Hiệu chuẩn đầu đo pH2
                             SizedBox(
-                              width: 340 / sizeDevice,
+                              width: 273 / sizeDevice,
                               height: 90 / sizeDevice,
                               child: Column(children: [
                                 SizedBox(height: 24 / sizeDevice),
@@ -89,7 +91,7 @@ class _CalibrationState extends State<Calibration> {
                                     });
                                   },
                                   child: Text(
-                                    "Đầu đo COD",
+                                    "Đầu đo pH2",
                                     style: TextStyle(
                                         fontSize: 34 / sizeDevice,
                                         fontWeight: FontWeight.bold,
@@ -106,16 +108,16 @@ class _CalibrationState extends State<Calibration> {
                                 _number == 1
                                     ? Container(
                                         height: 5 / sizeDevice,
-                                        width: 200 / sizeDevice,
+                                        width: 170 / sizeDevice,
                                         color: Colors.orange,
                                       )
                                     : Container()
                               ]),
                             ),
 
-                            // hiệu chuẩn TSS
+                            //Hiệu chuẩn đầu đo pH3
                             SizedBox(
-                              width: 340 / sizeDevice,
+                              width: 273 / sizeDevice,
                               height: 90 / sizeDevice,
                               child: Column(children: [
                                 SizedBox(height: 24 / sizeDevice),
@@ -126,7 +128,7 @@ class _CalibrationState extends State<Calibration> {
                                     });
                                   },
                                   child: Text(
-                                    "Đầu đo TSS",
+                                    "Đầu đo pH3",
                                     style: TextStyle(
                                         fontSize: 34 / sizeDevice,
                                         fontWeight: FontWeight.bold,
@@ -143,15 +145,15 @@ class _CalibrationState extends State<Calibration> {
                                 _number == 2
                                     ? Container(
                                         height: 5 / sizeDevice,
-                                        width: 200 / sizeDevice,
+                                        width: 170 / sizeDevice,
                                         color: Colors.orange,
                                       )
                                     : Container()
                               ]),
                             ),
-                            //Hiệu chuẩn nh4
+                            //Hiệu chuẩn cod, bod
                             SizedBox(
-                              width: 340 / sizeDevice,
+                              width: 273 / sizeDevice,
                               height: 90 / sizeDevice,
                               child: Column(children: [
                                 SizedBox(height: 24 / sizeDevice),
@@ -162,7 +164,7 @@ class _CalibrationState extends State<Calibration> {
                                     });
                                   },
                                   child: Text(
-                                    "Đầu đo NH4+",
+                                    "Đầu đo COD",
                                     style: TextStyle(
                                         fontSize: 34 / sizeDevice,
                                         fontWeight: FontWeight.bold,
@@ -179,7 +181,44 @@ class _CalibrationState extends State<Calibration> {
                                 _number == 3
                                     ? Container(
                                         height: 5 / sizeDevice,
-                                        width: 210 / sizeDevice,
+                                        width: 200 / sizeDevice,
+                                        color: Colors.orange,
+                                      )
+                                    : Container()
+                              ]),
+                            ),
+
+                            // hiệu chuẩn TSS
+                            SizedBox(
+                              width: 273 / sizeDevice,
+                              height: 90 / sizeDevice,
+                              child: Column(children: [
+                                SizedBox(height: 24 / sizeDevice),
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      _number = 4;
+                                    });
+                                  },
+                                  child: Text(
+                                    "Đầu đo TSS",
+                                    style: TextStyle(
+                                        fontSize: 34 / sizeDevice,
+                                        fontWeight: FontWeight.bold,
+                                        color: _number == 4
+                                            ? const Color.fromARGB(
+                                                255, 5, 148, 10)
+                                            : Colors.black),
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.fromLTRB(
+                                      0, 7 / sizeDevice, 0, 0),
+                                ),
+                                _number == 4
+                                    ? Container(
+                                        height: 5 / sizeDevice,
+                                        width: 200 / sizeDevice,
                                         color: Colors.orange,
                                       )
                                     : Container()
@@ -194,12 +233,14 @@ class _CalibrationState extends State<Calibration> {
                         width: 1300 / sizeDevice,
                       ),
                       _number == 0
-                          ? const CalibrationpH()
+                          ? const CalibrationpH1()
                           : (_number == 1
-                              ? const CalibrationCOD()
+                              ? const CalibrationpH2()
                               : (_number == 2
-                                  ? const CalibrationTSS()
-                                  : const CalibrationTSS()))
+                                  ? const CalibrationpH3()
+                                  : (_number == 3
+                                      ? const CalibrationCOD()
+                                      : const CalibrationTSS())))
                     ],
                   ),
                 )

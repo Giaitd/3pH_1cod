@@ -5,11 +5,8 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:quantrac_online_hongphat/services/file_transfer_service.dart';
 
 class HomePageService extends GetxService {
-  FileTransferService fileTransferService = Get.put(FileTransferService());
-
   RxDouble sizeDevice = 1.1.obs;
 
   //check timer sent data to server run
@@ -92,14 +89,9 @@ class HomePageService extends GetxService {
   void onInit() {
     super.onInit();
     Future.delayed(const Duration(milliseconds: 3000), () async {
-      await fileTransferService.getDataFTPStorage();
       Timer.periodic(const Duration(milliseconds: 2000), (timer) {
         setDataToNative();
         _getData();
-      });
-
-      Timer.periodic(const Duration(seconds: 50), (timer) {
-        fileTransferService.uploadFileToFTPServer();
       });
     });
   }
@@ -129,6 +121,7 @@ class HomePageService extends GetxService {
       "offsetPH2": double.parse(mapSetup["offsetpH2"]),
       "offsetPH3": double.parse(mapSetup["offsetpH3"]),
       "offsetCOD": double.parse(mapSetup["offsetCOD"]),
+      "offsetTSS": double.parse(mapSetup["offsetTSS"]),
     };
 
     try {

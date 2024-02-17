@@ -1,6 +1,5 @@
 import 'package:quantrac_online_hongphat/common/simple_appbar.dart';
 import 'package:quantrac_online_hongphat/helper/router.dart';
-import 'package:quantrac_online_hongphat/services/file_transfer_service.dart';
 import 'package:quantrac_online_hongphat/services/homepage_service.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +8,6 @@ import 'package:quantrac_online_hongphat/view/calibartion_screen/calibration.dar
 import 'package:quantrac_online_hongphat/view/dulieuquantrac/dulieuquantrac_widget.dart';
 import 'package:quantrac_online_hongphat/view/qrcode/generate_qrcode.dart';
 import 'package:quantrac_online_hongphat/view/setup_screen/caidatcanhbao_widget.dart';
-import 'package:quantrac_online_hongphat/view/setup_screen/caidatlaymau.dart';
-import 'package:quantrac_online_hongphat/view/setup_screen/ftp_server_setup.dart';
 import '../../common/other_widget.dart';
 import '../../model/duLieuQuanTrac_model.dart';
 import '../notification_screen/notification.dart';
@@ -28,7 +25,6 @@ class _MenuWidgetState extends State<MenuWidget> {
   Widget build(BuildContext context) {
     HomePageService homePageService = Get.put(HomePageService());
     ServerService serverService = Get.put(ServerService());
-    FileTransferService fileTransferService = Get.put(FileTransferService());
 
     double sizeDevice = homePageService.sizeDevice.value;
     DuLieuQuanTracModel duLieuQuanTracModel = DuLieuQuanTracModel();
@@ -66,11 +62,6 @@ class _MenuWidgetState extends State<MenuWidget> {
                   }
                   toPage(context, const DulieuQuanTracWidget());
                 }),
-                // buttonMenuWidget(context,
-                //     title: 'Cài đặt lấy mẫu',
-                //     image: 'assets/images/sample.png', function: () async {
-                //   toPage(context, const CaiDatLayMauWidget());
-                // }),
                 buttonMenuWidget(context,
                     title: 'Cài đặt cảnh báo',
                     image: 'assets/images/caidat.png', function: () async {
@@ -85,12 +76,6 @@ class _MenuWidgetState extends State<MenuWidget> {
                     title: 'Cài đặt server',
                     image: 'assets/images/server.png', function: () async {
                   toPage(context, const ServerSetupWidget());
-                }),
-                buttonMenuWidget(context,
-                    title: 'Cài đặt truyền dữ liệu',
-                    image: 'assets/images/folder.png', function: () async {
-                  await fileTransferService.getDataFTPStorage();
-                  toPage(context, const FTPServerSetup());
                 }),
                 buttonMenuWidget(context,
                     title: 'Mã QR code',

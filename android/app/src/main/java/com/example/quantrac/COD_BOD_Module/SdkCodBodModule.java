@@ -69,9 +69,9 @@ public class SdkCodBodModule {
     public CodBodData getCodBodData() {
 
         try {
-            double bodData =0.0;
+            double bodData = 0.0;
             double codData;
-            double tssData=0.0;
+            double tssData = 0.0;
             //cod
             byte[] bufferCod = new byte[]{8, 3, 32, 0, 0, 4, 79, 80}; // {08 03 20 00 00 04 4F 50}
             this.usbSerialPort.write(bufferCod, this.WRITE_WAIT_MILLIS);
@@ -96,13 +96,8 @@ public class SdkCodBodModule {
             checkReadTss = Utils.bytesToHex(new byte[]{bufferStatusTss[0], bufferStatusTss[1], bufferStatusTss[2]});
 
 
-//            Log.d("data12=== ",checkReadBod);
-//            Log.d("data13=== ",checkReadTss);
-
             // đọc giá trị COD
-//            if (checkReadCod.equals("080308") && checkReadBod.equals("080304") && checkReadTss.equals("080304")) {
-                if (checkReadCod.equals("080308") && checkReadBod.equals("080304")) {
-//            if (checkReadCod.equals("080308")) {
+            if (checkReadCod.equals("080308") && checkReadBod.equals("080304")) {
 
                 //đọc Cod
                 String codString = Utils.bytesToHex(new byte[]{bufferStatusCod[10], bufferStatusCod[9], bufferStatusCod[8], bufferStatusCod[7]});

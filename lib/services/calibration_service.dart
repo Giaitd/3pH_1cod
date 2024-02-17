@@ -1,11 +1,21 @@
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import '../helper/router.dart';
+
 class CalibrationService extends GetxService {
   //calibration
-  RxBool calibpHZero = false.obs;
-  RxBool calibpHSlopeLo = false.obs;
-  RxBool calibpHSlopeHi = false.obs;
+  RxBool calibpH1Zero = false.obs;
+  RxBool calibpH1SlopeLo = false.obs;
+  RxBool calibpH1SlopeHi = false.obs;
+
+  RxBool calibpH2Zero = false.obs;
+  RxBool calibpH2SlopeLo = false.obs;
+  RxBool calibpH2SlopeHi = false.obs;
+
+  RxBool calibpH3Zero = false.obs;
+  RxBool calibpH3SlopeLo = false.obs;
+  RxBool calibpH3SlopeHi = false.obs;
 
   RxBool calibNH4Zero = false.obs;
   RxBool calibNH4Slope = false.obs;
@@ -22,35 +32,49 @@ class CalibrationService extends GetxService {
   static const platform = MethodChannel('giaitd.com/data');
 
   //hiệu chuẩn đầu đo PH
-  Future<void> calibrationPH() async {
+  Future<void> calibrationPH1() async {
     var sendDataToNative1 = <String, dynamic>{
-      "calibpHZero": calibpHZero.value,
-      "calibpHSlopeLo": calibpHSlopeLo.value,
-      "calibpHSlopeHi": calibpHSlopeHi.value,
+      "calibpH1Zero": calibpH1Zero.value,
+      "calibpH1SlopeLo": calibpH1SlopeLo.value,
+      "calibpH1SlopeHi": calibpH1SlopeHi.value,
     };
 
     try {
-      await platform.invokeMethod('calibrationPH', sendDataToNative1);
+      await platform.invokeMethod('calibrationPH1', sendDataToNative1);
     } on PlatformException catch (e) {
       print(e);
     }
   }
 
-  //hiệu chuẩn đầu đo NH4
-  Future<void> calibrationNH4() async {
+  Future<void> calibrationPH2() async {
     var sendDataToNative2 = <String, dynamic>{
-      "calibNH4Zero": calibNH4Zero.value,
-      "calibNH4Slope": calibNH4Slope.value,
+      "calibpH2Zero": calibpH2Zero.value,
+      "calibpH2SlopeLo": calibpH2SlopeLo.value,
+      "calibpH2SlopeHi": calibpH2SlopeHi.value,
     };
 
     try {
-      await platform.invokeMethod('calibrationNH4', sendDataToNative2);
+      await platform.invokeMethod('calibrationPH2', sendDataToNative2);
     } on PlatformException catch (e) {
       print(e);
     }
   }
 
-  //hiệu chuẩn đầu đo NH4
+  Future<void> calibrationPH3() async {
+    var sendDataToNative3 = <String, dynamic>{
+      "calibpH3Zero": calibpH3Zero.value,
+      "calibpH3SlopeLo": calibpH3SlopeLo.value,
+      "calibpH3SlopeHi": calibpH3SlopeHi.value,
+    };
+
+    try {
+      await platform.invokeMethod('calibrationPH3', sendDataToNative3);
+    } on PlatformException catch (e) {
+      print(e);
+    }
+  }
+
+  //hiệu chuẩn đầu đo TSS
   Future<void> calibrationTSS() async {
     var sendDataToNative2 = <String, dynamic>{
       "calibTSSZero": calibTSSZero.value,
@@ -79,5 +103,19 @@ class CalibrationService extends GetxService {
     } on PlatformException catch (e) {
       print(e);
     }
+  }
+
+  //hàm thực hiện hiệu chuẩn đầu đo pH, dùng chung trong widget đầu đo pH
+  Future<void> calibZero(
+    bool calibZeroBtn,
+  ) async {
+    print('data====   ${calibZeroBtn}');
+    if (homePageService.lockDevice.value == false) {
+      calibZeroBtn = !calibZeroBtn;
+      homePageService.lockDevice.value = true;
+    } else {
+      showNotification();
+    }
+    print('data====   ${calibZeroBtn}');
   }
 }

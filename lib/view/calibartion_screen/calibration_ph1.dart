@@ -8,14 +8,14 @@ import '../../services/calibration_service.dart';
 import '../../services/homepage_service.dart';
 import '../../services/secure_storage.dart';
 
-class CalibrationpH extends StatefulWidget {
-  const CalibrationpH({Key? key}) : super(key: key);
+class CalibrationpH1 extends StatefulWidget {
+  const CalibrationpH1({Key? key}) : super(key: key);
 
   @override
-  State<CalibrationpH> createState() => _CalibrationpHState();
+  State<CalibrationpH1> createState() => _CalibrationpH1State();
 }
 
-class _CalibrationpHState extends State<CalibrationpH> {
+class _CalibrationpH1State extends State<CalibrationpH1> {
   HomePageService homePageService = Get.put(HomePageService());
   SecureStorage storage = Get.put(SecureStorage());
   CalibrationService calibrationService = Get.put(CalibrationService());
@@ -26,10 +26,10 @@ class _CalibrationpHState extends State<CalibrationpH> {
     super.initState();
     if (timer1 != null) timer1!.cancel();
     timer1 = Timer.periodic(const Duration(seconds: 1), (timer) {
-      calibrationService.calibrationPH();
-      calibrationService.calibpHZero.value = false;
-      calibrationService.calibpHSlopeLo.value = false;
-      calibrationService.calibpHSlopeHi.value = false;
+      calibrationService.calibrationPH1();
+      calibrationService.calibpH1Zero.value = false;
+      calibrationService.calibpH1SlopeLo.value = false;
+      calibrationService.calibpH1SlopeHi.value = false;
     });
   }
 
@@ -219,7 +219,7 @@ class _CalibrationpHState extends State<CalibrationpH> {
                         onPressed: () {
                           if (homePageService.lockDevice.value == false) {
                             setState(() {
-                              calibrationService.calibpHZero.value = true;
+                              calibrationService.calibpH1Zero.value = true;
                               homePageService.lockDevice.value = true;
                             });
                           } else {
@@ -240,7 +240,7 @@ class _CalibrationpHState extends State<CalibrationpH> {
                                     fontSize: 30 / sizeDevice,
                                     fontWeight: FontWeight.bold,
                                     color:
-                                        calibrationService.calibpHZero.value ==
+                                        calibrationService.calibpH1Zero.value ==
                                                 true
                                             ? Colors.red
                                             : Colors.white),
@@ -251,7 +251,7 @@ class _CalibrationpHState extends State<CalibrationpH> {
                                     fontSize: 30 / sizeDevice,
                                     fontWeight: FontWeight.bold,
                                     color:
-                                        calibrationService.calibpHZero.value ==
+                                        calibrationService.calibpH1Zero.value ==
                                                 true
                                             ? Colors.red
                                             : Colors.white),
@@ -281,7 +281,7 @@ class _CalibrationpHState extends State<CalibrationpH> {
                         onPressed: () {
                           if (homePageService.lockDevice.value == false) {
                             setState(() {
-                              calibrationService.calibpHSlopeLo.value = true;
+                              calibrationService.calibpH1SlopeLo.value = true;
                               homePageService.lockDevice.value = true;
                             });
                           } else {
@@ -302,7 +302,7 @@ class _CalibrationpHState extends State<CalibrationpH> {
                                     fontSize: 30 / sizeDevice,
                                     fontWeight: FontWeight.bold,
                                     color: calibrationService
-                                                .calibpHSlopeLo.value ==
+                                                .calibpH1SlopeLo.value ==
                                             true
                                         ? Colors.red
                                         : Colors.white),
@@ -313,7 +313,7 @@ class _CalibrationpHState extends State<CalibrationpH> {
                                     fontSize: 30 / sizeDevice,
                                     fontWeight: FontWeight.bold,
                                     color: calibrationService
-                                                .calibpHSlopeLo.value ==
+                                                .calibpH1SlopeLo.value ==
                                             true
                                         ? Colors.red
                                         : Colors.white),
@@ -343,7 +343,7 @@ class _CalibrationpHState extends State<CalibrationpH> {
                         onPressed: () {
                           if (homePageService.lockDevice.value == false) {
                             setState(() {
-                              calibrationService.calibpHSlopeHi.value = true;
+                              calibrationService.calibpH1SlopeHi.value = true;
                               homePageService.lockDevice.value = true;
                             });
                           } else {
@@ -364,7 +364,7 @@ class _CalibrationpHState extends State<CalibrationpH> {
                                     fontSize: 30 / sizeDevice,
                                     fontWeight: FontWeight.bold,
                                     color: calibrationService
-                                                .calibpHSlopeHi.value ==
+                                                .calibpH1SlopeHi.value ==
                                             true
                                         ? Colors.red
                                         : Colors.white),
@@ -375,7 +375,7 @@ class _CalibrationpHState extends State<CalibrationpH> {
                                     fontSize: 30 / sizeDevice,
                                     fontWeight: FontWeight.bold,
                                     color: calibrationService
-                                                .calibpHSlopeHi.value ==
+                                                .calibpH1SlopeHi.value ==
                                             true
                                         ? Colors.red
                                         : Colors.white),

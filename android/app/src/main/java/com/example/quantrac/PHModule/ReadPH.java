@@ -19,19 +19,42 @@ public class ReadPH {
             public void run() {
                 mTimerHandler.post(() -> {
 
-                    SdkPHModule phSDK = new SdkPHModule();
+                    SdkPHModule pHSDK = new SdkPHModule();
                     List<DeviceInfo> devices = SDKLocker.getAllUsbDevicesHasDriver(context);
                     for (DeviceInfo each : devices) {
-                        boolean connect = phSDK.connect(context, each, 9600);
+                        boolean connect = pHSDK.connect(context, each, 9600);
                         if (connect) {
-
-                            Globals.getPHData = phSDK.getPHData();
+                            Globals.getPH1Data = pHSDK.getPH1Data();
                             if (SdkPHModule.checkReadPH.equals("060308")) {
-                                Globals.pH = Math.round((Globals.getPHData.pH + Globals.offsetpH) * 100) / 100.0;
-                                Globals.temp = Globals.getPHData.temp;
+                                Globals.pH1 = Math.round((Globals.getPH1Data.pH + Globals.offsetPH1) * 100) / 100.0;
+                                Globals.temp1 = Globals.getPH1Data.temp;
                             } else {
-                                Globals.pH = 0.00;
-                                Globals.temp = 0.0;
+                                Globals.pH1 = 0.00;
+                                Globals.temp1 = 0.0;
+                            }
+                        }
+
+                        connect = pHSDK.connect(context, each, 9600);
+                        if (connect) {
+                            Globals.getPH2Data = pHSDK.getPH2Data();
+                            if (SdkPHModule.checkReadPH.equals("070308")) {
+                                Globals.pH2 = Math.round((Globals.getPH2Data.pH + Globals.offsetPH2) * 100) / 100.0;
+                                Globals.temp2 = Globals.getPH2Data.temp;
+                            } else {
+                                Globals.pH2 = 0.00;
+                                Globals.temp2 = 0.0;
+                            }
+                        }
+
+                        connect = pHSDK.connect(context, each, 9600);
+                        if (connect) {
+                            Globals.getPH3Data = pHSDK.getPH3Data();
+                            if (SdkPHModule.checkReadPH.equals("080308")) {
+                                Globals.pH3 = Math.round((Globals.getPH3Data.pH + Globals.offsetPH3) * 100) / 100.0;
+                                Globals.temp3 = Globals.getPH3Data.temp;
+                            } else {
+                                Globals.pH3 = 0.00;
+                                Globals.temp3 = 0.0;
                             }
                         }
                     }
