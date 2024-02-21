@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quantrac_online_hongphat/common/simple_appbar.dart';
-import 'package:quantrac_online_hongphat/view/setup_screen/caidatcanhbao.dart';
+import 'package:do_ph_cod_hongphat/common/simple_appbar.dart';
+import 'package:do_ph_cod_hongphat/view/setup_screen/caidatcanhbao.dart';
 import '../../services/homepage_service.dart';
 
 class CaiDatCanhBaoWidget extends StatefulWidget {

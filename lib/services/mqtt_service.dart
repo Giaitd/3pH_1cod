@@ -5,8 +5,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
-import 'package:quantrac_online_hongphat/services/homepage_service.dart';
-import 'package:quantrac_online_hongphat/services/request_service.dart';
+import 'package:do_ph_cod_hongphat/services/homepage_service.dart';
+import 'package:do_ph_cod_hongphat/services/request_service.dart';
 import 'url/url.dart';
 
 class MqttService extends GetxService {

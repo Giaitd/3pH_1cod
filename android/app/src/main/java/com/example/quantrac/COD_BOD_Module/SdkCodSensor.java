@@ -17,7 +17,7 @@ import asim.sdk.common.Utils;
 import asim.sdk.locker.DeviceInfo;
 
 
-public class SdkCodBodModule {
+public class SdkCodSensor {
     public UsbSerialPort usbSerialPort;
     public boolean connected = false;
     public int READ_WAIT_MILLIS = 1500;
@@ -31,7 +31,7 @@ public class SdkCodBodModule {
     public static byte[] newByte, byteFinal;
     public static int crcHi, crcLow;
 
-    public SdkCodBodModule() {
+    public SdkCodSensor() {
     }
 
     public boolean connect(Context context, DeviceInfo deviceInfo, int baudRate) {
@@ -65,15 +65,15 @@ public class SdkCodBodModule {
         }
     }
 
-    //read COD id: 08
-    public CodBodData getCodBodData() {
+    //read COD id: 01
+    public CodSensorData getCodSensorData() {
 
         try {
-            double bodData = 0.0;
+            double bodData;
             double codData;
-            double tssData = 0.0;
+            double tssData;
             //cod
-            byte[] bufferCod = new byte[]{8, 3, 32, 0, 0, 4, 79, 80}; // {08 03 20 00 00 04 4F 50}
+            byte[] bufferCod = new byte[]{1, 3, 32, 0, 0, 4, 79, -55}; // {01 03 20 00 00 04 4F C9}
             this.usbSerialPort.write(bufferCod, this.WRITE_WAIT_MILLIS);
             byte[] bufferStatusCod = new byte[15];
             this.usbSerialPort.read(bufferStatusCod, this.READ_WAIT_MILLIS);
@@ -81,7 +81,7 @@ public class SdkCodBodModule {
 
 
             //bod
-            byte[] bufferBod = new byte[]{8, 3, 32, 4, 0, 2, -114, -109}; // {08 03 20 04 00 02 8E 93}   08 03 20 04 00 02 8E 93
+            byte[] bufferBod = new byte[]{1, 3, 32, 4, 0, 2, -114, 10}; // {01 03 20 04 00 02 8E 0A}
             this.usbSerialPort.write(bufferBod, this.WRITE_WAIT_MILLIS);
             byte[] bufferStatusBod = new byte[11];
             this.usbSerialPort.read(bufferStatusBod, this.READ_WAIT_MILLIS);
@@ -89,7 +89,7 @@ public class SdkCodBodModule {
 
 
             //tss
-            byte[] bufferTss = new byte[]{8, 3, 33, 0, 0, 2, -50, -82}; // {08 03 21 00 00 02 CE AE}
+            byte[] bufferTss = new byte[]{1, 3, 33, 0, 0, 2, -50, 55}; // {01 03 21 00 00 02 CE 37}
             this.usbSerialPort.write(bufferTss, this.WRITE_WAIT_MILLIS);
             byte[] bufferStatusTss = new byte[11];
             this.usbSerialPort.read(bufferStatusTss, this.READ_WAIT_MILLIS);
@@ -97,7 +97,7 @@ public class SdkCodBodModule {
 
 
             // đọc giá trị COD
-            if (checkReadCod.equals("080308") && checkReadBod.equals("080304")) {
+            if (checkReadCod.equals("010308") && checkReadBod.equals("010304")) {
 
                 //đọc Cod
                 String codString = Utils.bytesToHex(new byte[]{bufferStatusCod[10], bufferStatusCod[9], bufferStatusCod[8], bufferStatusCod[7]});
@@ -128,70 +128,70 @@ public class SdkCodBodModule {
                 } else codData = -(numberCod1 + numberCod2);
 
 
-//                //đọc giá trị bod
-//                String bodString = Utils.bytesToHex(new byte[]{bufferStatusBod[6], bufferStatusBod[5], bufferStatusBod[4], bufferStatusBod[3]});
-//                String dataReceiveBod = "";
-//                for (int i = 0; i < bodString.length(); i++) {
-//                    int k = Integer.parseInt(String.valueOf(bodString.charAt(i)), 16);
-//                    dataReceiveBod = dataReceiveBod + String.format("%4s", Integer.toBinaryString(k)).replace(' ', '0');
-//                }
-//
-//                String dataReceiveBod0 = String.valueOf(dataReceiveBod.charAt(0));//sign of value: 0: +    1: -
-//                String dataReceiveBod1 = dataReceiveBod.substring(1, 9);
-//                String dataReceiveBod2 = dataReceiveBod.substring(9);
-//
-//                int exponentBod = Integer.parseInt(dataReceiveBod1, 2) - 127;
-//
-//                String mantissaBod = "1" + dataReceiveBod2.substring(0, exponentBod);
-//
-//                String tgBod = dataReceiveBod2.substring(exponentBod);
-//                int numberBod1 = Integer.parseInt(mantissaBod, 2);
-//                double numberBod2 = 0.0;
-//
-//                for (int j = 0; j < tgBod.length(); j++) {
-//                    numberBod2 += Character.getNumericValue(tgBod.charAt(j)) * Math.pow(2, -(j + 1));
-//                }
-//
-//                if (dataReceiveBod0.equals("0")) {
-//                    bodData = numberBod1 + numberBod2;
-//                } else bodData = -(numberBod1 + numberBod2);
-//
-//
-//                //đọc giá trị tss ======
-//                String tssString = Utils.bytesToHex(new byte[]{bufferStatusTss[6], bufferStatusTss[5], bufferStatusTss[4], bufferStatusTss[3]});
-//                if (tssString.equals("00000000")) {
-//                    tssData = 0.0;
-//                } else {
-//                    String dataReceiveTss = "";
-//                    for (int i = 0; i < tssString.length(); i++) {
-//                        int k = Integer.parseInt(String.valueOf(bodString.charAt(i)), 16);
-//                        dataReceiveTss = dataReceiveTss + String.format("%4s", Integer.toBinaryString(k)).replace(' ', '0');
-//                    }
-//
-//                    String dataReceiveTss0 = String.valueOf(dataReceiveTss.charAt(0));//sign of value: 0: +    1: -
-//                    String dataReceiveTss1 = dataReceiveTss.substring(1, 9);
-//                    String dataReceiveTss2 = dataReceiveTss.substring(9);
-//
-//                    int exponentTss = Integer.parseInt(dataReceiveTss1, 2) - 127;
-//
-//                    String mantissaTss = "1" + dataReceiveTss2.substring(0, exponentTss);
-//
-//                    String tgTss = dataReceiveTss2.substring(exponentTss);
-//                    int numberTss1 = Integer.parseInt(mantissaTss, 2);
-//                    double numberTss2 = 0.0;
-//
-//                    for (int j = 0; j < tgTss.length(); j++) {
-//                        numberTss2 += Character.getNumericValue(tgTss.charAt(j)) * Math.pow(2, -(j + 1));
-//                    }
-//
-//                    if (dataReceiveTss0.equals("0")) {
-//                        tssData = numberTss1 + numberTss2;
-//                    } else tssData = -(numberTss1 + numberTss2);
-//                }
+                //đọc giá trị bod
+                String bodString = Utils.bytesToHex(new byte[]{bufferStatusBod[6], bufferStatusBod[5], bufferStatusBod[4], bufferStatusBod[3]});
+                String dataReceiveBod = "";
+                for (int i = 0; i < bodString.length(); i++) {
+                    int k = Integer.parseInt(String.valueOf(bodString.charAt(i)), 16);
+                    dataReceiveBod = dataReceiveBod + String.format("%4s", Integer.toBinaryString(k)).replace(' ', '0');
+                }
+
+                String dataReceiveBod0 = String.valueOf(dataReceiveBod.charAt(0));//sign of value: 0: +    1: -
+                String dataReceiveBod1 = dataReceiveBod.substring(1, 9);
+                String dataReceiveBod2 = dataReceiveBod.substring(9);
+
+                int exponentBod = Integer.parseInt(dataReceiveBod1, 2) - 127;
+
+                String mantissaBod = "1" + dataReceiveBod2.substring(0, exponentBod);
+
+                String tgBod = dataReceiveBod2.substring(exponentBod);
+                int numberBod1 = Integer.parseInt(mantissaBod, 2);
+                double numberBod2 = 0.0;
+
+                for (int j = 0; j < tgBod.length(); j++) {
+                    numberBod2 += Character.getNumericValue(tgBod.charAt(j)) * Math.pow(2, -(j + 1));
+                }
+
+                if (dataReceiveBod0.equals("0")) {
+                    bodData = numberBod1 + numberBod2;
+                } else bodData = -(numberBod1 + numberBod2);
+
+
+                //đọc giá trị tss ======
+                String tssString = Utils.bytesToHex(new byte[]{bufferStatusTss[6], bufferStatusTss[5], bufferStatusTss[4], bufferStatusTss[3]});
+                if (tssString.equals("00000000")) {
+                    tssData = 0.0;
+                } else {
+                    String dataReceiveTss = "";
+                    for (int i = 0; i < tssString.length(); i++) {
+                        int k = Integer.parseInt(String.valueOf(bodString.charAt(i)), 16);
+                        dataReceiveTss = dataReceiveTss + String.format("%4s", Integer.toBinaryString(k)).replace(' ', '0');
+                    }
+
+                    String dataReceiveTss0 = String.valueOf(dataReceiveTss.charAt(0));//sign of value: 0: +    1: -
+                    String dataReceiveTss1 = dataReceiveTss.substring(1, 9);
+                    String dataReceiveTss2 = dataReceiveTss.substring(9);
+
+                    int exponentTss = Integer.parseInt(dataReceiveTss1, 2) - 127;
+
+                    String mantissaTss = "1" + dataReceiveTss2.substring(0, exponentTss);
+
+                    String tgTss = dataReceiveTss2.substring(exponentTss);
+                    int numberTss1 = Integer.parseInt(mantissaTss, 2);
+                    double numberTss2 = 0.0;
+
+                    for (int j = 0; j < tgTss.length(); j++) {
+                        numberTss2 += Character.getNumericValue(tgTss.charAt(j)) * Math.pow(2, -(j + 1));
+                    }
+
+                    if (dataReceiveTss0.equals("0")) {
+                        tssData = numberTss1 + numberTss2;
+                    } else tssData = -(numberTss1 + numberTss2);
+                }
 
                 this.disconnect();
 
-                return new CodBodData(codData, bodData, tssData);
+                return new CodSensorData(codData, bodData, tssData);
             } else {
                 this.disconnect();
                 return null;
@@ -206,7 +206,7 @@ public class SdkCodBodModule {
     //calibration factory default
     public void calibrationCODDefault() {
         try {
-            byte[] buffer = new byte[]{8, 16, 17, 0, 0, 4, 8, 0, 0, -128, 63, 0, 0, 0, 0, 72, -88}; //{08,10,,11,00,00,04,08,00,00,80,3F,00,00,00,00,48,A8}
+            byte[] buffer = new byte[]{1, 16, 34, 0, 0, 4, 8, 0, 0, -128, 63, 0, 0, 0, 0, -59, -99}; //{01,10,22,00,00,04,08,00,00,80,3F,00,00,00,00,C5,9D}
             this.usbSerialPort.write(buffer, this.WRITE_WAIT_MILLIS);
             byte[] bufferStatus = new byte[17];
             this.usbSerialPort.read(bufferStatus, this.READ_WAIT_MILLIS);
@@ -220,7 +220,7 @@ public class SdkCodBodModule {
     //turn on the brush
     public void turnOnTheBrush() {
         try {
-            byte[] buffer = new byte[]{8, 16, 49, 0, 0, 0, 0, 21, -109}; //{08,10,13,00,00,00,00,15,93}
+            byte[] buffer = new byte[]{1, 16, 19, 0, 0, 0, 0, -116, -109}; //{01,10,13,00,00,00,00,8C,93}
             this.usbSerialPort.write(buffer, this.WRITE_WAIT_MILLIS);
             byte[] bufferStatus = new byte[9];
             this.usbSerialPort.read(bufferStatus, this.READ_WAIT_MILLIS);
@@ -236,7 +236,7 @@ public class SdkCodBodModule {
         try {
             byte[] byteK;
             byte[] byteB;
-            byte[] byteFirst = new byte[]{8, 16, 17, 0, 0, 4, 8};
+            byte[] byteFirst = new byte[]{1, 16, 34, 0, 0, 4, 8};
             K = 150 / (Globals.Y * Globals.X);
             B = -(K * Globals.X);
             Log.d("name===K=", String.valueOf(K));
@@ -251,7 +251,7 @@ public class SdkCodBodModule {
             byteB = newByte;
 
             //byte lệnh (chưa có CRC)
-            byteFinal = new byte[15]; //{08,10,11,00,00,04,08,K1,K2,K3,K4,B1,B2,B3,B4}
+            byteFinal = new byte[15]; //{01,10,22,00,00,04,08,K1,K2,K3,K4,B1,B2,B3,B4}
 
             System.arraycopy(byteFirst, 0, byteFinal, 0, byteFirst.length);
             System.arraycopy(byteK, 0, byteFinal, 7, byteK.length);

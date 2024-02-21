@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(quantrac_online_hongphat LANGUAGES CXX)
+project(do_ph_cod_hongphat LANGUAGES CXX)
 
-set(BINARY_NAME "quantrac_online_hongphat")
+set(BINARY_NAME "do_ph_cod_hongphat")
 
 cmake_policy(SET CMP0063 NEW)
 

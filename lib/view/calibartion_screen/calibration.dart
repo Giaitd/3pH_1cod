@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quantrac_online_hongphat/common/simple_appbar.dart';
-import 'package:quantrac_online_hongphat/view/calibartion_screen/calibration_cod.dart';
-import 'package:quantrac_online_hongphat/view/calibartion_screen/calibration_ph1.dart';
-import 'package:quantrac_online_hongphat/view/calibartion_screen/calibration_ph2.dart';
-import 'package:quantrac_online_hongphat/view/calibartion_screen/calibration_ph3.dart';
-import 'package:quantrac_online_hongphat/view/calibartion_screen/calibration_tss.dart';
+import 'package:do_ph_cod_hongphat/common/simple_appbar.dart';
+import 'package:do_ph_cod_hongphat/view/calibartion_screen/calibration_cod.dart';
+import 'package:do_ph_cod_hongphat/view/calibartion_screen/calibration_ph1.dart';
+import 'package:do_ph_cod_hongphat/view/calibartion_screen/calibration_ph2.dart';
+import 'package:do_ph_cod_hongphat/view/calibartion_screen/calibration_ph3.dart';
 import '../../services/homepage_service.dart';
 
 class Calibration extends StatefulWidget {
@@ -181,49 +180,49 @@ class _CalibrationState extends State<Calibration> {
                                 _number == 3
                                     ? Container(
                                         height: 5 / sizeDevice,
-                                        width: 200 / sizeDevice,
+                                        width: 180 / sizeDevice,
                                         color: Colors.orange,
                                       )
                                     : Container()
                               ]),
                             ),
 
-                            // hiệu chuẩn TSS
-                            SizedBox(
-                              width: 273 / sizeDevice,
-                              height: 90 / sizeDevice,
-                              child: Column(children: [
-                                SizedBox(height: 24 / sizeDevice),
-                                GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      _number = 4;
-                                    });
-                                  },
-                                  child: Text(
-                                    "Đầu đo TSS",
-                                    style: TextStyle(
-                                        fontSize: 34 / sizeDevice,
-                                        fontWeight: FontWeight.bold,
-                                        color: _number == 4
-                                            ? const Color.fromARGB(
-                                                255, 5, 148, 10)
-                                            : Colors.black),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.fromLTRB(
-                                      0, 7 / sizeDevice, 0, 0),
-                                ),
-                                _number == 4
-                                    ? Container(
-                                        height: 5 / sizeDevice,
-                                        width: 200 / sizeDevice,
-                                        color: Colors.orange,
-                                      )
-                                    : Container()
-                              ]),
-                            ),
+                            // // hiệu chuẩn TSS
+                            // SizedBox(
+                            //   width: 273 / sizeDevice,
+                            //   height: 90 / sizeDevice,
+                            //   child: Column(children: [
+                            //     SizedBox(height: 24 / sizeDevice),
+                            //     GestureDetector(
+                            //       onTap: () {
+                            //         setState(() {
+                            //           _number = 4;
+                            //         });
+                            //       },
+                            //       child: Text(
+                            //         "Đầu đo TSS",
+                            //         style: TextStyle(
+                            //             fontSize: 34 / sizeDevice,
+                            //             fontWeight: FontWeight.bold,
+                            //             color: _number == 4
+                            //                 ? const Color.fromARGB(
+                            //                     255, 5, 148, 10)
+                            //                 : Colors.black),
+                            //       ),
+                            //     ),
+                            //     Container(
+                            //       margin: EdgeInsets.fromLTRB(
+                            //           0, 7 / sizeDevice, 0, 0),
+                            //     ),
+                            //     _number == 4
+                            //         ? Container(
+                            //             height: 5 / sizeDevice,
+                            //             width: 200 / sizeDevice,
+                            //             color: Colors.orange,
+                            //           )
+                            //         : Container()
+                            //   ]),
+                            // ),
                           ],
                         ),
                       ),
@@ -238,9 +237,7 @@ class _CalibrationState extends State<Calibration> {
                               ? const CalibrationpH2()
                               : (_number == 2
                                   ? const CalibrationpH3()
-                                  : (_number == 3
-                                      ? const CalibrationCOD()
-                                      : const CalibrationTSS())))
+                                  : const CalibrationCOD()))
                     ],
                   ),
                 )

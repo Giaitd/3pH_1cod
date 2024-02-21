@@ -26,10 +26,18 @@ public class ControlOutput extends android.app.Service {
                 mTimerHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (Globals.pH1 < Globals.pHMinSet || Globals.pH1 > Globals.pHMaxSet) {
-                            SetDO.pumpOn(context);
-                        } else if (Globals.pH1 > (Globals.pHMinSet + 0.05) && Globals.pH1 < (Globals.pHMaxSet - 0.05)) {
-                            SetDO.pumpOff(context);
+                        Globals.pHMid = (Globals.pHMinSet + Globals.pHMaxSet) / 2;
+
+                        if (Globals.dIData.i0[0] && Globals.pH1 > Globals.pHMaxSet) {
+                            SetDO.axit1On(context);
+                        } else if (Globals.pH1 < (Globals.pHMid + 0.1) || !Globals.dIData.i0[0]) {
+                            SetDO.axit1Off(context);
+                        }
+
+                        if (Globals.dIData.i0[1] && Globals.pH1 < Globals.pHMinSet) {
+                            SetDO.bazo1On(context);
+                        } else if (Globals.pH1 > (Globals.pHMid - 0.1) || !Globals.dIData.i0[1]) {
+                            SetDO.bazo1Off(context);
                         }
                     }
                 });

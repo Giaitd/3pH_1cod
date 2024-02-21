@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quantrac_online_hongphat/helper/router.dart';
-import 'package:quantrac_online_hongphat/services/calibration_service.dart';
+import 'package:do_ph_cod_hongphat/helper/router.dart';
+import 'package:do_ph_cod_hongphat/services/calibration_service.dart';
 import '../../services/homepage_service.dart';
 import '../../services/secure_storage.dart';
 import '../popup_screen/popup_screen.dart';
@@ -49,10 +49,29 @@ class _CalibrationCODState extends State<CalibrationCOD> {
             40 / sizeDevice, 30 / sizeDevice, 40 / sizeDevice, 0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           //text hướng dẫn
+          Padding(
+            padding: EdgeInsets.only(left: 230 / sizeDevice),
+            child: Text(
+              "ĐỌC KỸ HƯỚNG DẪN SỬ DỤNG TRƯỚC KHI TIẾN HÀNH HIỆU CHUẨN",
+              style: TextStyle(
+                  fontSize: 26 / sizeDevice, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Container(
+            height: 15 / sizeDevice,
+          ),
           Text(
             "- Nhấn nút “Vệ sinh đầu đo” để thiết bị tự vệ sinh. Sau đó rửa sạch đầu đo với nước sạch. ",
             style: TextStyle(
-                fontSize: 28 / sizeDevice, fontWeight: FontWeight.w500),
+                fontSize: 24 / sizeDevice, fontWeight: FontWeight.w500),
+          ),
+          Container(
+            height: 15 / sizeDevice,
+          ),
+          Text(
+            "- Nhấn chọn “Hiệu chuẩn về mặc đinh” trước khi tiến hành các bước tiếp theo",
+            style: TextStyle(
+                fontSize: 24 / sizeDevice, fontWeight: FontWeight.w500),
           ),
           Container(
             height: 15 / sizeDevice,
@@ -60,7 +79,7 @@ class _CalibrationCODState extends State<CalibrationCOD> {
           Text(
             "- Nhúng đầu đo vào nước tinh khiết (nước cất hoặc nước khử ion) đảm bảo phần cảm biến ngập sâu trong nước ít nhất 2 cm. Đợi 1 phút cho giá trị đọc ổn định. Nhập giá trị COD đo được vào cột X.",
             style: TextStyle(
-                fontSize: 28 / sizeDevice, fontWeight: FontWeight.w500),
+                fontSize: 24 / sizeDevice, fontWeight: FontWeight.w500),
           ),
           Container(
             height: 15 / sizeDevice,
@@ -68,7 +87,7 @@ class _CalibrationCODState extends State<CalibrationCOD> {
           Text(
             "- Nhúng đầu đo vào dung dịch chuẩn 150mg/l COD với yêu cầu như trên. Sau đó nhập giá trị COD đo được vào cột Y.",
             style: TextStyle(
-                fontSize: 28 / sizeDevice, fontWeight: FontWeight.w500),
+                fontSize: 24 / sizeDevice, fontWeight: FontWeight.w500),
           ),
           Container(
             height: 15 / sizeDevice,
@@ -76,15 +95,10 @@ class _CalibrationCODState extends State<CalibrationCOD> {
           Text(
             "- Nhấn nút “Hiệu chuẩn” để tiến hành hiệu chuẩn.",
             style: TextStyle(
-                fontSize: 28 / sizeDevice, fontWeight: FontWeight.w500),
+                fontSize: 24 / sizeDevice, fontWeight: FontWeight.w500),
           ),
           Container(
             height: 15 / sizeDevice,
-          ),
-          Text(
-            "- Muốn khôi phục dữ liệu hiệu chuẩn về mặc định, nhấn “Hiệu chuẩn về mặc định”.",
-            style: TextStyle(
-                fontSize: 28 / sizeDevice, fontWeight: FontWeight.w500),
           ),
 
           //nhập thông số
@@ -175,8 +189,8 @@ class _CalibrationCODState extends State<CalibrationCOD> {
                               } else {
                                 homePageService.offsetCOD.value =
                                     double.parse(text);
-                                storage.writeDataSetup(7);
-                                storage.readDataSetup(7);
+                                storage.writeDataSetup(8);
+                                storage.readDataSetup(8);
                               }
                             },
                             decoration: InputDecoration(

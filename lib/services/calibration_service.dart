@@ -106,16 +106,16 @@ class CalibrationService extends GetxService {
   }
 
   //hàm thực hiện hiệu chuẩn đầu đo pH, dùng chung trong widget đầu đo pH
-  Future<void> calibZero(
-    bool calibZeroBtn,
+  Future<void> calibFunc(
+    bool calibBtn,
   ) async {
-    print('data====   ${calibZeroBtn}');
+    print('data====   ${calibBtn}');
     if (homePageService.lockDevice.value == false) {
-      calibZeroBtn = !calibZeroBtn;
+      calibBtn = !calibBtn;
       homePageService.lockDevice.value = true;
     } else {
       showNotification();
     }
-    print('data====   ${calibZeroBtn}');
+    print('data====   ${calibBtn}');
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quantrac_online_hongphat/services/calibration_service.dart';
+import 'package:do_ph_cod_hongphat/services/calibration_service.dart';
 import '../../services/homepage_service.dart';
 import '../../services/secure_storage.dart';
 import '../popup_screen/popup_screen.dart';
@@ -26,9 +26,17 @@ calibrationPHTemplate(BuildContext context,
     child: Column(children: [
       //text hướng dẫn
       Text(
+        "ĐỌC KỸ HƯỚNG DẪN SỬ DỤNG TRƯỚC KHI TIẾN HÀNH HIỆU CHUẨN",
+        style:
+            TextStyle(fontSize: 26 / sizeDevice, fontWeight: FontWeight.bold),
+      ),
+      Container(
+        height: 15 / sizeDevice,
+      ),
+      Text(
         "- Rửa sạch đầu đo với nước sạch hoặc nước cất sau đó thấm khô trước khi cho vào dung dịch hiệu chuẩn (không được lau)",
         style:
-            TextStyle(fontSize: 28 / sizeDevice, fontWeight: FontWeight.w500),
+            TextStyle(fontSize: 24 / sizeDevice, fontWeight: FontWeight.w500),
       ),
       Container(
         height: 15 / sizeDevice,
@@ -36,7 +44,7 @@ calibrationPHTemplate(BuildContext context,
       Text(
         "- Sử dụng đúng dung dịch dùng để hiệu chuẩn (nếu sử dụng sai dung dịch có thể dẫn đến hỏng hóc không khắc phục được). Chờ 5 phút để kết quả ổn định. Sau đó hiệu chuẩn nếu kết quả sai lệch.",
         style:
-            TextStyle(fontSize: 28 / sizeDevice, fontWeight: FontWeight.w500),
+            TextStyle(fontSize: 24 / sizeDevice, fontWeight: FontWeight.w500),
       ),
       Container(
         margin: EdgeInsets.fromLTRB(50 / sizeDevice, 10 / sizeDevice, 0, 0),
@@ -46,19 +54,19 @@ calibrationPHTemplate(BuildContext context,
             Text(
               "+ Dung dịch chuẩn pH 6.86: Hiệu chuẩn điểm không - zero",
               style: TextStyle(
-                  fontSize: 28 / sizeDevice, fontWeight: FontWeight.w500),
+                  fontSize: 24 / sizeDevice, fontWeight: FontWeight.w500),
             ),
             Container(height: 7 / sizeDevice),
             Text(
               "+ Dung dịch chuẩn pH 4.01: Hiệu chuẩn điểm dốc - slope nếu cần đo mẫu có tính axit",
               style: TextStyle(
-                  fontSize: 28 / sizeDevice, fontWeight: FontWeight.w500),
+                  fontSize: 24 / sizeDevice, fontWeight: FontWeight.w500),
             ),
             Container(height: 7 / sizeDevice),
             Text(
               "+ Dung dịch chuẩn pH 9.18: Hiệu chuẩn điểm dốc - slope nếu cần đo mẫu có tính kiềm",
               style: TextStyle(
-                  fontSize: 28 / sizeDevice, fontWeight: FontWeight.w500),
+                  fontSize: 24 / sizeDevice, fontWeight: FontWeight.w500),
             ),
           ],
         ),
@@ -87,7 +95,7 @@ calibrationPHTemplate(BuildContext context,
                       child: Text(
                         "pH",
                         style: TextStyle(
-                            fontSize: 28 / sizeDevice,
+                            fontSize: 24 / sizeDevice,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -151,8 +159,7 @@ calibrationPHTemplate(BuildContext context,
                               double.parse(text) > 0.5) {
                             PopupScreen().anounDialog(context);
                           } else {
-                            homePageService.offsetpH1.value =
-                                double.parse(text);
+                            offsetValue = double.parse(text);
                             storage.writeDataSetup(number);
                             storage.readDataSetup(number);
                           }
@@ -190,8 +197,7 @@ calibrationPHTemplate(BuildContext context,
                 child: Column(children: [
                   ElevatedButton(
                     onPressed: () {
-                      calibrationService
-                          .calibZero(calibrationService.calibpH1SlopeLo.value);
+                      calibrationService.calibFunc(calibZero);
                     },
                     child: Container(
                       height: 100 / sizeDevice,
@@ -242,14 +248,7 @@ calibrationPHTemplate(BuildContext context,
                 child: Column(children: [
                   ElevatedButton(
                     onPressed: () {
-                      // if (homePageService.lockDevice.value == false) {
-                      //   setState(() {
-                      //     calibSlopeLo = true;
-                      //     homePageService.lockDevice.value = true;
-                      //   });
-                      // } else {
-                      //   showNotification();
-                      // }
+                      calibrationService.calibFunc(calibSlopeLo);
                     },
                     child: Container(
                       height: 100 / sizeDevice,
@@ -300,14 +299,7 @@ calibrationPHTemplate(BuildContext context,
                 child: Column(children: [
                   ElevatedButton(
                     onPressed: () {
-                      // if (homePageService.lockDevice.value == false) {
-                      //   setState(() {
-                      //     calibSlopeHi = true;
-                      //     homePageService.lockDevice.value = true;
-                      //   });
-                      // } else {
-                      //   showNotification();
-                      // }
+                      calibrationService.calibFunc(calibSlopeHi);
                     },
                     child: Container(
                       height: 100 / sizeDevice,

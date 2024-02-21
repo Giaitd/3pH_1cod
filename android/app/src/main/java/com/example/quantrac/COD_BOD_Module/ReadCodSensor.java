@@ -11,28 +11,27 @@ import java.util.TimerTask;
 import asim.sdk.locker.DeviceInfo;
 import asim.sdk.locker.SDKLocker;
 
-public class ReadCodBod {
+public class ReadCodSensor {
 
-    public static TimerTask getCodBodTask(Context context) {
+    public static TimerTask getCodSensorTask(Context context) {
         Handler mTimerHandler = new Handler();
         return new TimerTask() {
             public void run() {
                 mTimerHandler.post(() -> {
 
-                    SdkCodBodModule codBodSDK = new SdkCodBodModule();
+                    SdkCodSensor codSensorSDK = new SdkCodSensor();
                     List<DeviceInfo> devices = SDKLocker.getAllUsbDevicesHasDriver(context);
 
                     for (DeviceInfo each : devices) {
-                        boolean connect = codBodSDK.connect(context, each, 9600);
+                        boolean connect = codSensorSDK.connect(context, each, 9600);
                         if (connect) {
 
-                            Globals.getCodBodData = codBodSDK.getCodBodData();
-                            if (SdkCodBodModule.checkReadCod.equals("080308")) {
+                            Globals.codSensorData = codSensorSDK.getCodSensorData();
+                            if (SdkCodSensor.checkReadCod.equals("080308")) {
 
-//                                Globals.bod = Math.round(Globals.getCodBodData.bod * 100) / 100.0;
-                                Globals.cod = Math.round((Globals.getCodBodData.cod + Globals.offsetCOD) * 100) / 100.0;
-//                                Globals.tss = Math.round(Globals.getCodBodData.tss * 100) / 100.0;
-//                                Globals.tss = 0.0;
+                                Globals.bod = Math.round(Globals.codSensorData.bod * 100) / 100.0;
+                                Globals.cod = Math.round((Globals.codSensorData.cod + Globals.offsetCOD) * 100) / 100.0;
+                                Globals.tss = Math.round(Globals.codSensorData.tss * 100) / 100.0;
 
 
                             } else {

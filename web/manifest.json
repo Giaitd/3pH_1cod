@@ -1,6 +1,6 @@
 {
-    "name": "quantrac_online_hongphat",
-    "short_name": "quantrac_online_hongphat",
+    "name": "do_ph_cod_hongphat",
+    "short_name": "do_ph_cod_hongphat",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

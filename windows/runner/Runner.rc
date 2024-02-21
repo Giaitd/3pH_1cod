@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "quantrac_online_hongphat" "\0"
+            VALUE "FileDescription", "do_ph_cod_hongphat" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "quantrac_online_hongphat" "\0"
+            VALUE "InternalName", "do_ph_cod_hongphat" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "quantrac_online_hongphat.exe" "\0"
-            VALUE "ProductName", "quantrac_online_hongphat" "\0"
+            VALUE "OriginalFilename", "do_ph_cod_hongphat.exe" "\0"
+            VALUE "ProductName", "do_ph_cod_hongphat" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

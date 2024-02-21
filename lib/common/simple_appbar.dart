@@ -1,3 +1,5 @@
+import 'package:do_ph_cod_hongphat/helper/router.dart';
+import 'package:do_ph_cod_hongphat/view/setup_screen/set_id.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../services/homepage_service.dart';
@@ -54,7 +56,16 @@ PreferredSize simpleAppBar(
                           },
                           fillColor: Colors.white,
                         )
-                      : null,
+                      : GestureDetector(
+                          child: Container(
+                            color: const Color.fromARGB(255, 0, 81, 255),
+                            width: 140 / sizeDevice,
+                            height: 60 / sizeDevice,
+                          ),
+                          onLongPress: () {
+                            toPage(context, const SetId());
+                          },
+                        ),
                 ),
                 SizedBox(
                   width: 1065 / sizeDevice,

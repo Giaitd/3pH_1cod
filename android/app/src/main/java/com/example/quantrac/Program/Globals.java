@@ -1,13 +1,10 @@
 package com.example.quantrac.Program;
 
-import com.example.quantrac.COD_BOD_Module.CodBodData;
+import com.example.quantrac.COD_BOD_Module.CodSensorData;
 import com.example.quantrac.DIDOModule.DIData;
 import com.example.quantrac.DIDOModule.DOData;
 import com.example.quantrac.PHModule.PHData;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -47,7 +44,7 @@ public class Globals {
     public static PHData getPH1Data = null;
     public static PHData getPH2Data = null;
     public static PHData getPH3Data = null;
-    public static CodBodData getCodBodData = null;
+    public static CodSensorData codSensorData = null;
 
 
     public static Timer timerReadDIDOData;
@@ -79,6 +76,8 @@ public class Globals {
     public static Double codSet = 100.0;
     public static Double bodSet = 50.0;
     public static Double tssSet = 100.0;
+
+    public static Double pHMid = 0.0;
 
 
 

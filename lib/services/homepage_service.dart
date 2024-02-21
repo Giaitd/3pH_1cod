@@ -150,4 +150,19 @@ class HomePageService extends GetxService {
       print(e);
     }
   }
+
+  Future<void> setupID() async {
+    var sendDataToNative1 = <String, dynamic>{
+      //id
+      "idOld": idOld.value,
+      "idNew": idNew.value,
+      "btnSetId": setID.value,
+    };
+
+    try {
+      await platform.invokeMethod('changeID', sendDataToNative1);
+    } on PlatformException catch (e) {
+      print(e);
+    }
+  }
 }

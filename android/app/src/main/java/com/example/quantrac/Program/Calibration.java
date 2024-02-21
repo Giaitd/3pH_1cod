@@ -3,7 +3,7 @@ package com.example.quantrac.Program;
 import android.content.Context;
 import android.os.Handler;
 
-import com.example.quantrac.COD_BOD_Module.SdkCodBodModule;
+import com.example.quantrac.COD_BOD_Module.SdkCodSensor;
 import com.example.quantrac.PHModule.SdkPHModule;
 
 import java.util.List;
@@ -140,7 +140,7 @@ public class Calibration {
 
                         //calibration cod sensor to default factory
                         if(Globals.codDefault){
-                            SdkCodBodModule CODSdk = new SdkCodBodModule();
+                            SdkCodSensor CODSdk = new SdkCodSensor();
                             List<DeviceInfo> devices = SDKLocker.getAllUsbDevicesHasDriver(context);
                             for (DeviceInfo each : devices) {
                                 boolean connect = CODSdk.connect(context, each, 9600);
@@ -152,7 +152,7 @@ public class Calibration {
 
                         //turn on the brush
                         if(Globals.turnOnBrush){
-                            SdkCodBodModule CODSdk = new SdkCodBodModule();
+                            SdkCodSensor CODSdk = new SdkCodSensor();
                             List<DeviceInfo> devices = SDKLocker.getAllUsbDevicesHasDriver(context);
                             for (DeviceInfo each : devices) {
                                 boolean connect = CODSdk.connect(context, each, 9600);
@@ -162,9 +162,9 @@ public class Calibration {
                             }
                         }
 
-                        //calibration code sensor
+                        //calibration cod sensor
                         if(Globals.codCalibration){
-                            SdkCodBodModule CODSdk = new SdkCodBodModule();
+                            SdkCodSensor CODSdk = new SdkCodSensor();
                             List<DeviceInfo> devices = SDKLocker.getAllUsbDevicesHasDriver(context);
                             for (DeviceInfo each : devices) {
                                 boolean connect = CODSdk.connect(context, each, 9600);

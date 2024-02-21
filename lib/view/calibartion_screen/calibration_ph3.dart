@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quantrac_online_hongphat/view/calibartion_screen/calibration_ph_template.dart';
+import 'package:do_ph_cod_hongphat/view/calibartion_screen/calibration_ph_template.dart';
 import '../../services/calibration_service.dart';
 import '../../services/homepage_service.dart';
 import '../../services/secure_storage.dart';
@@ -40,9 +40,14 @@ class _CalibrationpH3State extends State<CalibrationpH3> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Container(
-          child: calibrationPHTemplate(
-            context,
-          ),
+          child: calibrationPHTemplate(context,
+              calibZero: calibrationService.calibpH3Zero.value,
+              calibSlopeHi: calibrationService.calibpH3SlopeHi.value,
+              calibSlopeLo: calibrationService.calibpH3SlopeLo.value,
+              realData: homePageService.pH3.value.toString(),
+              offsetReal: homePageService.mapSetup["offsetpH3"],
+              number: 7,
+              offsetValue: homePageService.offsetpH3.value),
         ));
   }
 }

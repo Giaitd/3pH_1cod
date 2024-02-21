@@ -27,7 +27,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   FlutterWindow window(project);
   Win32Window::Point origin(10, 10);
   Win32Window::Size size(1280, 720);
-  if (!window.CreateAndShow(L"quantrac_online_hongphat", origin, size)) {
+  if (!window.CreateAndShow(L"do_ph_cod_hongphat", origin, size)) {
     return EXIT_FAILURE;
   }
   window.SetQuitOnClose(true);

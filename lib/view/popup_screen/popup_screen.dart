@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quantrac_online_hongphat/helper/router.dart';
-import 'package:quantrac_online_hongphat/view/calibartion_screen/calibration.dart';
-import 'package:quantrac_online_hongphat/view/dulieuquantrac/dulieuquantrac_widget.dart';
-import 'package:quantrac_online_hongphat/view/notification_screen/notification.dart';
-import 'package:quantrac_online_hongphat/view/qrcode/generate_qrcode.dart';
-import 'package:quantrac_online_hongphat/view/setup_screen/caidatcanhbao_widget.dart';
+import 'package:do_ph_cod_hongphat/helper/router.dart';
+import 'package:do_ph_cod_hongphat/view/calibartion_screen/calibration.dart';
+import 'package:do_ph_cod_hongphat/view/dulieuquantrac/dulieuquantrac_widget.dart';
+import 'package:do_ph_cod_hongphat/view/notification_screen/notification.dart';
+import 'package:do_ph_cod_hongphat/view/qrcode/generate_qrcode.dart';
+import 'package:do_ph_cod_hongphat/view/setup_screen/caidatcanhbao_widget.dart';
 import '../../services/server_service.dart';
 import '../../model/duLieuQuanTrac_model.dart';
 import '../../services/homepage_service.dart';

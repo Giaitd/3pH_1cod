@@ -1,9 +1,9 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quantrac_online_hongphat/services/homepage_service.dart';
-import '../main_screen/main_screen.dart';
+import 'package:do_ph_cod_hongphat/services/homepage_service.dart';
+import '../../common/simple_appbar.dart';
+import '../../helper/router.dart';
 import '../popup_screen/popup_screen.dart';
 
 class SetId extends StatefulWidget {
@@ -35,52 +35,13 @@ class _SetIdState extends State<SetId> {
     return Obx(
       () => Scaffold(
         resizeToAvoidBottomInset: false,
+        appBar: simpleAppBar(context, title: 'Cài đặt ID đầu đo pH'),
         body: Container(
-          height: 800 / sizeDevice,
+          height: 700 / sizeDevice,
           width: 1365 / sizeDevice,
           color: const Color(0xFFF0F0F0),
           child: Column(
             children: [
-              Row(
-                children: [
-                  Container(
-                    width: 150 / sizeDevice,
-                    height: 100 / sizeDevice,
-                    color: const Color(0xFFD9D9D9),
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints.expand(),
-                      child: IconButton(
-                        onPressed: () {
-                          timer.cancel();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => MainScreen(),
-                              ));
-                        },
-                        icon: Image.asset(
-                          'assets/images/undo.png',
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 10 / sizeDevice),
-                  Container(
-                    width: 1205 / sizeDevice,
-                    height: 100 / sizeDevice,
-                    color: const Color(0xFF4657EF),
-                    child: Center(
-                      child: Text('Cài đặt id cho đầu đo pH',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Roboto Mono',
-                              fontSize: 34 / sizeDevice,
-                              fontWeight: FontWeight.w800)),
-                    ),
-                  )
-                ],
-              ),
               SizedBox(height: 20 / sizeDevice),
               SizedBox(
                 width: 1365 / sizeDevice,
@@ -144,9 +105,10 @@ class _SetIdState extends State<SetId> {
                               color: Colors.white,
                               child: Center(
                                 child: TextFormField(
+                                  enabled: (!homePageService.lockDevice.value),
                                   textAlign: TextAlign.center,
-                                  onChanged: (Text) => {
-                                    _id1 = Text,
+                                  onChanged: (text) => {
+                                    _id1 = text,
                                     homePageService.idOld.value =
                                         int.parse(_id1),
                                   },
@@ -159,7 +121,7 @@ class _SetIdState extends State<SetId> {
                                   style: TextStyle(
                                     fontFamily: 'Roboto Mono',
                                     color: Colors.black,
-                                    fontSize: 30 / sizeDevice,
+                                    fontSize: 26 / sizeDevice,
                                     fontWeight: FontWeight.w800,
                                   ),
                                 ),
@@ -176,9 +138,10 @@ class _SetIdState extends State<SetId> {
                               color: Colors.white,
                               child: Center(
                                 child: TextFormField(
+                                  enabled: (!homePageService.lockDevice.value),
                                   textAlign: TextAlign.center,
-                                  onChanged: (Text) => {
-                                    _id2 = Text,
+                                  onChanged: (text) => {
+                                    _id2 = text,
                                     homePageService.idNew.value =
                                         int.parse(_id2),
                                   },
@@ -191,7 +154,7 @@ class _SetIdState extends State<SetId> {
                                   style: TextStyle(
                                     fontFamily: 'Roboto Mono',
                                     color: Colors.black,
-                                    fontSize: 30 / sizeDevice,
+                                    fontSize: 26 / sizeDevice,
                                     fontWeight: FontWeight.w800,
                                   ),
                                 ),
@@ -209,14 +172,18 @@ class _SetIdState extends State<SetId> {
                       child: OutlinedButton(
                           onPressed: () {
                             setState(() {
-                              if (int.parse(_id2) < 6 ||
-                                  int.parse(_id2) > 13 ||
-                                  int.parse(_id1) < 6 ||
-                                  int.parse(_id1) > 13 ||
-                                  int.parse(_id2) == int.parse(_id1)) {
-                                PopupScreen().anounDialog(context);
+                              if (homePageService.lockDevice.value == false) {
+                                if (int.parse(_id2) < 6 ||
+                                    int.parse(_id2) > 13 ||
+                                    int.parse(_id1) < 6 ||
+                                    int.parse(_id1) > 13 ||
+                                    int.parse(_id2) == int.parse(_id1)) {
+                                  PopupScreen().anounDialog(context);
+                                } else {
+                                  homePageService.setID.value = true;
+                                }
                               } else {
-                                homePageService.setID.value = true;
+                                showNotification();
                               }
                             });
                           },
@@ -232,9 +199,10 @@ class _SetIdState extends State<SetId> {
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                              primary: homePageService.setID.value == true
-                                  ? Colors.green
-                                  : const Color(0xFFC0C0C0),
+                              backgroundColor:
+                                  homePageService.setID.value == true
+                                      ? Colors.green
+                                      : const Color(0xFFC0C0C0),
                               side: const BorderSide(color: Colors.black))),
                     ),
                   ),

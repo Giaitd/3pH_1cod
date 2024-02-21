@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:quantrac_online_hongphat/services/homepage_service.dart';
+import 'package:do_ph_cod_hongphat/services/homepage_service.dart';
 
 HomePageService homePageService = Get.put(HomePageService());
 
@@ -16,7 +16,7 @@ void toPage(BuildContext context, Widget page,
 
 void showNotification(
     {String title =
-        'Nhập mật khẩu mở khóa trước khi tiến hành hiệu chuẩn'}) async {
+        'Đọc kỹ hướng dẫn sử dụng, sau đó nhập mật khẩu mở khóa trước khi tiến hành hiệu chuẩn'}) async {
   Fluttertoast.showToast(
       toastLength: Toast.LENGTH_LONG,
       msg: title,
