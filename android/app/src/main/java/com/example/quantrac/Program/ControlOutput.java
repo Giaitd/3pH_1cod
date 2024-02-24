@@ -39,6 +39,13 @@ public class ControlOutput extends android.app.Service {
                         } else if (Globals.pH1 > (Globals.pHMid - 0.1) || !Globals.dIData.i0[1]) {
                             SetDO.bazo1Off(context);
                         }
+
+                        //bơm dinh duong
+                        if (Globals.dIData.i0[2] && Globals.cod < Globals.codSet) {
+                            SetDO.pumpOn(context);
+                        } else if (!Globals.dIData.i0[2] || Globals.cod > (Globals.codSet + 0.5)) {
+                            SetDO.pumpOff(context);
+                        }
                     }
                 });
             }

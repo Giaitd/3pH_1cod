@@ -113,9 +113,22 @@ public class SdkCodSensor {
 
                 int exponentCod = Integer.parseInt(dataReceiveCod1, 2) - 127;
 
-                String mantissaCod = "1" + dataReceiveCod2.substring(0, exponentCod);
+                String mantissaCod = "";
 
-                String tgCod = dataReceiveCod2.substring(exponentCod);
+                String tgCod = "";
+                if (exponentCod == -1) {
+                    tgCod = "1".concat(dataReceiveCod2);
+                    mantissaCod = "0";
+                } else if (exponentCod == -2) {
+                    tgCod = "01".concat(dataReceiveCod2);
+                    mantissaCod = "0";
+                } else if (exponentCod < -2) {
+                    tgCod = "0";
+                    mantissaCod = "0";
+                } else {
+                    mantissaCod = "1" + dataReceiveCod2.substring(0, exponentCod);
+                    tgCod = dataReceiveCod2.substring(exponentCod);
+                }
                 int numberCod1 = Integer.parseInt(mantissaCod, 2);
                 double numberCod2 = 0.0;
 
@@ -127,67 +140,94 @@ public class SdkCodSensor {
                     codData = (numberCod1 + numberCod2);
                 } else codData = -(numberCod1 + numberCod2);
 
-
-                //đọc giá trị bod
-                String bodString = Utils.bytesToHex(new byte[]{bufferStatusBod[6], bufferStatusBod[5], bufferStatusBod[4], bufferStatusBod[3]});
-                String dataReceiveBod = "";
-                for (int i = 0; i < bodString.length(); i++) {
-                    int k = Integer.parseInt(String.valueOf(bodString.charAt(i)), 16);
-                    dataReceiveBod = dataReceiveBod + String.format("%4s", Integer.toBinaryString(k)).replace(' ', '0');
-                }
-
-                String dataReceiveBod0 = String.valueOf(dataReceiveBod.charAt(0));//sign of value: 0: +    1: -
-                String dataReceiveBod1 = dataReceiveBod.substring(1, 9);
-                String dataReceiveBod2 = dataReceiveBod.substring(9);
-
-                int exponentBod = Integer.parseInt(dataReceiveBod1, 2) - 127;
-
-                String mantissaBod = "1" + dataReceiveBod2.substring(0, exponentBod);
-
-                String tgBod = dataReceiveBod2.substring(exponentBod);
-                int numberBod1 = Integer.parseInt(mantissaBod, 2);
-                double numberBod2 = 0.0;
-
-                for (int j = 0; j < tgBod.length(); j++) {
-                    numberBod2 += Character.getNumericValue(tgBod.charAt(j)) * Math.pow(2, -(j + 1));
-                }
-
-                if (dataReceiveBod0.equals("0")) {
-                    bodData = numberBod1 + numberBod2;
-                } else bodData = -(numberBod1 + numberBod2);
+                bodData = 0.0;
+                tssData = 0.0;
 
 
-                //đọc giá trị tss ======
-                String tssString = Utils.bytesToHex(new byte[]{bufferStatusTss[6], bufferStatusTss[5], bufferStatusTss[4], bufferStatusTss[3]});
-                if (tssString.equals("00000000")) {
-                    tssData = 0.0;
-                } else {
-                    String dataReceiveTss = "";
-                    for (int i = 0; i < tssString.length(); i++) {
-                        int k = Integer.parseInt(String.valueOf(bodString.charAt(i)), 16);
-                        dataReceiveTss = dataReceiveTss + String.format("%4s", Integer.toBinaryString(k)).replace(' ', '0');
-                    }
-
-                    String dataReceiveTss0 = String.valueOf(dataReceiveTss.charAt(0));//sign of value: 0: +    1: -
-                    String dataReceiveTss1 = dataReceiveTss.substring(1, 9);
-                    String dataReceiveTss2 = dataReceiveTss.substring(9);
-
-                    int exponentTss = Integer.parseInt(dataReceiveTss1, 2) - 127;
-
-                    String mantissaTss = "1" + dataReceiveTss2.substring(0, exponentTss);
-
-                    String tgTss = dataReceiveTss2.substring(exponentTss);
-                    int numberTss1 = Integer.parseInt(mantissaTss, 2);
-                    double numberTss2 = 0.0;
-
-                    for (int j = 0; j < tgTss.length(); j++) {
-                        numberTss2 += Character.getNumericValue(tgTss.charAt(j)) * Math.pow(2, -(j + 1));
-                    }
-
-                    if (dataReceiveTss0.equals("0")) {
-                        tssData = numberTss1 + numberTss2;
-                    } else tssData = -(numberTss1 + numberTss2);
-                }
+//                //đọc giá trị bod
+//                String bodString = Utils.bytesToHex(new byte[]{bufferStatusBod[6], bufferStatusBod[5], bufferStatusBod[4], bufferStatusBod[3]});
+//                String dataReceiveBod = "";
+//                for (int i = 0; i < bodString.length(); i++) {
+//                    int k = Integer.parseInt(String.valueOf(bodString.charAt(i)), 16);
+//                    dataReceiveBod = dataReceiveBod + String.format("%4s", Integer.toBinaryString(k)).replace(' ', '0');
+//                }
+//
+//                String dataReceiveBod0 = String.valueOf(dataReceiveBod.charAt(0));//sign of value: 0: +    1: -
+//                String dataReceiveBod1 = dataReceiveBod.substring(1, 9);
+//                String dataReceiveBod2 = dataReceiveBod.substring(9);
+//
+//                int exponentBod = Integer.parseInt(dataReceiveBod1, 2) - 127;
+//                String mantissaBod = "";
+//                String tgBod = "";
+//                if (exponentBod == -1) {
+//                    tgBod = "1".concat(dataReceiveBod2);
+//                    mantissaBod = "0";
+//                } else if (exponentBod == -2) {
+//                    tgBod = "01".concat(dataReceiveBod2);
+//                    mantissaBod = "0";
+//                } else if (exponentBod < -2) {
+//                    tgBod = "0";
+//                    mantissaBod = "0";
+//                } else {
+//                    mantissaBod = "1" + dataReceiveBod2.substring(0, exponentBod);
+//                    tgBod = dataReceiveBod2.substring(exponentBod);
+//                }
+//                int numberBod1 = Integer.parseInt(mantissaBod, 2);
+//                double numberBod2 = 0.0;
+//
+//                for (int j = 0; j < tgBod.length(); j++) {
+//                    numberBod2 += Character.getNumericValue(tgBod.charAt(j)) * Math.pow(2, -(j + 1));
+//                }
+//
+//                if (dataReceiveBod0.equals("0")) {
+//                    bodData = numberBod1 + numberBod2;
+//                } else bodData = -(numberBod1 + numberBod2);
+//
+//
+//                //đọc giá trị tss ======
+//                String tssString = Utils.bytesToHex(new byte[]{bufferStatusTss[6], bufferStatusTss[5], bufferStatusTss[4], bufferStatusTss[3]});
+//                if (tssString.equals("00000000")) {
+//                    tssData = 0.0;
+//                } else {
+//                    String dataReceiveTss = "";
+//                    for (int i = 0; i < tssString.length(); i++) {
+//                        int k = Integer.parseInt(String.valueOf(bodString.charAt(i)), 16);
+//                        dataReceiveTss = dataReceiveTss + String.format("%4s", Integer.toBinaryString(k)).replace(' ', '0');
+//                    }
+//
+//                    String dataReceiveTss0 = String.valueOf(dataReceiveTss.charAt(0));//sign of value: 0: +    1: -
+//                    String dataReceiveTss1 = dataReceiveTss.substring(1, 9);
+//                    String dataReceiveTss2 = dataReceiveTss.substring(9);
+//
+//                    int exponentTss = Integer.parseInt(dataReceiveTss1, 2) - 127;
+//
+//                    String mantissaTss = "";
+//
+//                    String tgTss = "";
+//                    if (exponentTss == -1) {
+//                        tgTss = "1".concat(dataReceiveTss2);
+//                        mantissaTss = "0";
+//                    } else if (exponentTss == -2) {
+//                        tgTss = "01".concat(dataReceiveTss2);
+//                        mantissaTss = "0";
+//                    } else if (exponentTss < -2) {
+//                        tgTss = "0";
+//                        mantissaTss = "0";
+//                    } else {
+//                        mantissaTss = "1" + dataReceiveTss2.substring(0, exponentTss);
+//                        tgTss = dataReceiveTss2.substring(exponentTss);
+//                    }
+//                    int numberTss1 = Integer.parseInt(mantissaTss, 2);
+//                    double numberTss2 = 0.0;
+//
+//                    for (int j = 0; j < tgTss.length(); j++) {
+//                        numberTss2 += Character.getNumericValue(tgTss.charAt(j)) * Math.pow(2, -(j + 1));
+//                    }
+//
+//                    if (dataReceiveTss0.equals("0")) {
+//                        tssData = numberTss1 + numberTss2;
+//                    } else tssData = -(numberTss1 + numberTss2);
+//                }
 
                 this.disconnect();
 

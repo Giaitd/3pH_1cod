@@ -69,32 +69,33 @@ public class SdkDIDOModule {
             this.usbSerialPort.read(bufferStatus, this.READ_WAIT_MILLIS);
             checkReadDI = Utils.bytesToHex(new byte[]{bufferStatus[0], bufferStatus[1]});
             if (checkReadDI.equals("0202")) {
-                int valueRead1 = 0;
-                int valueRead2 = 0;
+                int valueReadDI0 = 0;
+                int valueReadDI1 = 0;
+                int valueReadDI2 = 0;
                 String numberByte = Utils.bytesToHex(new byte[]{bufferStatus[2]});
                 int numberByteMore = Integer.parseInt(numberByte);
                 if (numberByteMore==1){
                     String value1 = Utils.bytesToHex(new byte[]{bufferStatus[3]});//8 bit low
-                    valueRead1 = Integer.parseInt(value1,16);
+                    valueReadDI0 = Integer.parseInt(value1,16);
 
                 } else  if (numberByteMore==2){
                     String value1 = Utils.bytesToHex(new byte[]{bufferStatus[3]});//8 bit low
                     String value2 = Utils.bytesToHex(new byte[]{bufferStatus[4]});//8 bit mid
-                    valueRead1 = Integer.parseInt(value1,16);
-                    valueRead2 = Integer.parseInt(value2,16);
+                    valueReadDI0 = Integer.parseInt(value1,16);
+                    valueReadDI1 = Integer.parseInt(value2,16);
                 }
 
                 boolean[] i0 = new boolean[8];
                 boolean[] i1 = new boolean[8];
                 boolean[] i2 = new boolean[8];
                 for (int i = 0; i < 8; i++) {
-                    i0[i] = (valueRead1 & (1 << i)) != 0;
-                    i1[i] = (valueRead2 & (1 << i)) != 0;
+                    i0[i] = (valueReadDI0 & (1 << i)) != 0;
+                    i1[i] = (valueReadDI1 & (1 << i)) != 0;
                     i2[i] = false;
                 }
 
                 this.disconnect();
-                return new DIData(i0, i1, i2);
+                return new DIData(i0, i1, i2, valueReadDI0,valueReadDI1,valueReadDI2);
 
             } else {
                 this.disconnect();

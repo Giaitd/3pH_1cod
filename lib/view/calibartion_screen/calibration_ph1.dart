@@ -18,6 +18,7 @@ class _CalibrationpH1State extends State<CalibrationpH1> {
   SecureStorage storage = Get.put(SecureStorage());
   CalibrationService calibrationService = Get.put(CalibrationService());
   Timer? timer1;
+  Timer? timer2;
 
   @override
   void initState() {
@@ -41,14 +42,15 @@ class _CalibrationpH1State extends State<CalibrationpH1> {
   Widget build(BuildContext context) {
     return Obx(
       () => Container(
-        child: calibrationPHTemplate(context,
-            calibZero: calibrationService.calibpH1Zero.value,
-            calibSlopeHi: calibrationService.calibpH1SlopeHi.value,
-            calibSlopeLo: calibrationService.calibpH1SlopeLo.value,
-            realData: homePageService.pH1.value.toString(),
-            offsetReal: homePageService.mapSetup["offsetpH1"],
-            number: 5,
-            offsetValue: homePageService.offsetpH1.value),
+        child: calibrationPHTemplate(
+          context,
+          calibZero: calibrationService.calibpH1Zero.value,
+          calibSlopeHi: calibrationService.calibpH1SlopeHi.value,
+          calibSlopeLo: calibrationService.calibpH1SlopeLo.value,
+          realData: homePageService.pH1.value.toString(),
+          offsetReal: homePageService.mapSetup["offsetpH1"],
+          number: 5,
+        ),
       ),
     );
   }

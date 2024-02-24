@@ -42,7 +42,14 @@ class _ThongSoQuanTracState extends State<ThongSoQuanTrac> {
               dataRealtime(context,
                   name: 'temp',
                   data: "${homePageService.temp1.value}",
-                  donViDo: 'oC')
+                  donViDo: 'oC'),
+              Container(height: 230 / sizeDevice),
+              getIOState(context, 'Phao bồn axit',
+                  value: homePageService.i0[0]),
+              getIOState(context, 'Phao bồn bazo',
+                  value: homePageService.i0[1]),
+              getIOState(context, 'Bơm axit', value: homePageService.q0[0]),
+              getIOState(context, 'Bơm bazo', value: homePageService.q0[1]),
             ]),
           ),
           //bể hiếu khí
@@ -56,7 +63,7 @@ class _ThongSoQuanTracState extends State<ThongSoQuanTrac> {
             child: Column(children: [
               Padding(
                 padding: EdgeInsets.only(top: 20 / sizeDevice),
-                child: Text('Bể hiếu khí',
+                child: Text('Bể thiếu khí',
                     style: TextStyle(
                         fontSize: 35 / sizeDevice,
                         fontWeight: FontWeight.w600)),
@@ -84,7 +91,7 @@ class _ThongSoQuanTracState extends State<ThongSoQuanTrac> {
             child: Column(children: [
               Padding(
                   padding: EdgeInsets.only(top: 20 / sizeDevice),
-                  child: Text('Bể thiếu khí',
+                  child: Text('Bể hiếu khí',
                       style: TextStyle(
                           fontSize: 35 / sizeDevice,
                           fontWeight: FontWeight.w600))),
@@ -97,18 +104,23 @@ class _ThongSoQuanTracState extends State<ThongSoQuanTrac> {
                   name: 'COD',
                   data: "${homePageService.cod.value}",
                   donViDo: 'mg/L'),
-              dataRealtime(context,
-                  name: 'BOD',
-                  data: "${homePageService.bod.value}",
-                  donViDo: 'mg/L'),
-              dataRealtime(context,
-                  name: 'TSS',
-                  data: "${homePageService.tss.value}",
-                  donViDo: 'mg/L'),
+              // dataRealtime(context,
+              //     name: 'BOD',
+              //     data: "${homePageService.bod.value}",
+              //     donViDo: 'mg/L'),
+              // dataRealtime(context,
+              //     name: 'TSS',
+              //     data: "${homePageService.tss.value}",
+              //     donViDo: 'mg/L'),
               dataRealtime(context,
                   name: 'temp',
                   data: "${homePageService.temp3.value}",
-                  donViDo: 'oC')
+                  donViDo: 'oC'),
+              Container(height: 210 / sizeDevice),
+              getIOState(context, 'Phao bồn dinh dưỡng',
+                  value: homePageService.i0[2]),
+              getIOState(context, 'Bơm dinh dưỡng',
+                  value: homePageService.q0[2]),
             ]),
           )
         ]),

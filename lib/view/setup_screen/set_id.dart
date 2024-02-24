@@ -19,12 +19,19 @@ class _SetIdState extends State<SetId> {
   late Timer timer;
   @override
   void initState() {
+    super.initState();
     timer = Timer.periodic(const Duration(milliseconds: 1000), (timer) {
-      // globals.setupID();
+      homePageService.setupID();
       if (!homePageService.offSetID.value) {
         homePageService.setID.value = false;
       }
     });
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 
   String _id1 = '';

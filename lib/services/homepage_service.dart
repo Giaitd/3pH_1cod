@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class HomePageService extends GetxService {
-  RxDouble sizeDevice = 1.1.obs;
+  RxDouble sizeDevice = 1.0.obs;
 
   //check timer sent data to server run
   RxBool check = false.obs;
@@ -28,6 +28,14 @@ class HomePageService extends GetxService {
   RxBool setID = false.obs;
   RxBool offSetID = false.obs;
   RxBool lockDevice = true.obs;
+
+  //DIDO
+  RxInt valueDO0 = 0.obs;
+  RxInt valueDI0 = 0.obs;
+  RxList<bool> q0 =
+      [false, false, false, false, false, false, false, false].obs;
+  RxList<bool> i0 =
+      [false, false, false, false, false, false, false, false].obs;
 
   //data setup
   RxDouble pHMinSet = 6.5.obs;
@@ -53,6 +61,7 @@ class HomePageService extends GetxService {
   RxDouble offsetTSS = 0.0.obs;
   RxDouble offsetpH2 = 0.0.obs;
   RxDouble offsetpH3 = 0.0.obs;
+  RxString offsetpH_1 = "".obs;
 
   /// //data save for setup parameter
   Map<String, dynamic> mapSetup = {
@@ -92,6 +101,7 @@ class HomePageService extends GetxService {
       Timer.periodic(const Duration(milliseconds: 2000), (timer) {
         setDataToNative();
         _getData();
+        convertData();
       });
     });
   }
@@ -146,8 +156,18 @@ class HomePageService extends GetxService {
       cod.value = getDataValues['getCod'];
       bod.value = getDataValues['getBod'];
       tss.value = getDataValues['getTss'];
+      valueDO0.value = getDataValues['getDO0'];
+      valueDI0.value = getDataValues['getDI0'];
     } on PlatformException catch (e) {
       print(e);
+    }
+  }
+
+  //Convert data
+  Future<void> convertData() async {
+    for (int i = 0; i < 8; i++) {
+      q0[i] = (valueDO0 & (1 << i)) != 0;
+      i0[i] = (valueDI0 & (1 << i)) != 0;
     }
   }
 

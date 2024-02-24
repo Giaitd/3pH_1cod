@@ -40,14 +40,15 @@ class _CalibrationpH3State extends State<CalibrationpH3> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Container(
-          child: calibrationPHTemplate(context,
-              calibZero: calibrationService.calibpH3Zero.value,
-              calibSlopeHi: calibrationService.calibpH3SlopeHi.value,
-              calibSlopeLo: calibrationService.calibpH3SlopeLo.value,
-              realData: homePageService.pH3.value.toString(),
-              offsetReal: homePageService.mapSetup["offsetpH3"],
-              number: 7,
-              offsetValue: homePageService.offsetpH3.value),
+          child: calibrationPHTemplate(
+            context,
+            calibZero: calibrationService.calibpH3Zero.value,
+            calibSlopeHi: calibrationService.calibpH3SlopeHi.value,
+            calibSlopeLo: calibrationService.calibpH3SlopeLo.value,
+            realData: homePageService.pH3.value.toString(),
+            offsetReal: homePageService.mapSetup["offsetpH3"],
+            number: 7,
+          ),
         ));
   }
 }

@@ -31,12 +31,12 @@ public class MainActivity extends FlutterActivity {
     @Override
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
         super.configureFlutterEngine(flutterEngine);
-        timerGetPH.schedule(ReadPH.getPHTask(getApplicationContext()), 0, 4000);
-        timerGetCod.schedule(ReadCodSensor.getCodSensorTask(getApplicationContext()), 500, 4000);
-        timerGetDIDO.schedule(ReadDIDO.getDIDOTask(getApplicationContext()), 600, 2000);
-        timerControlOutput.schedule(ControlOutput.controlOutputTask(getApplicationContext()), 700, 2000);
-        timerSetCalibration.schedule(Calibration.CalibrationSensor(getApplicationContext()), 800, 1000);
-        timerChangeID.schedule(SetID.changeID(getApplicationContext()),1000,1000);
+       timerGetPH.schedule(ReadPH.getPHTask(getApplicationContext()), 0, 4000);
+       timerGetCod.schedule(ReadCodSensor.getCodSensorTask(getApplicationContext()), 500, 4000);
+       timerGetDIDO.schedule(ReadDIDO.getDIDOTask(getApplicationContext()), 600, 2000);
+       timerControlOutput.schedule(ControlOutput.controlOutputTask(getApplicationContext()), 700, 2000);
+       timerSetCalibration.schedule(Calibration.CalibrationSensor(getApplicationContext()), 800, 1000);
+       timerChangeID.schedule(SetID.changeID(getApplicationContext()),1000,1000);
 
 
         new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), CHANNEL)
@@ -94,6 +94,9 @@ public class MainActivity extends FlutterActivity {
                         arg2.put("getCod", Globals.cod);
                         arg2.put("getBod", Globals.bod);
                         arg2.put("getTss", Globals.tss);
+
+                        arg2.put("getDO0", Globals.dOData.valueDO0);
+                        arg2.put("getDI0",Globals.dIData.valueDI0);
 
                         result.success(arg2);
                     } else if (call.method.equals("changeID")) {

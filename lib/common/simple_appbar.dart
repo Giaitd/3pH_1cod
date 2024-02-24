@@ -14,6 +14,7 @@ PreferredSize simpleAppBar(
   bool isGetBack = true,
   bool leading = true,
   bool trailing = true,
+  String password = 'hongphat2009',
 }) {
   HomePageService homePageService = Get.put(HomePageService());
   double sizeDevice = homePageService.sizeDevice.value;
@@ -103,7 +104,8 @@ PreferredSize simpleAppBar(
                           if (homePageService.lockDevice.value == false) {
                             homePageService.lockDevice.value = true;
                           } else {
-                            PopupScreen().inputPassword(context, function: () {
+                            PopupScreen().inputPassword(context,
+                                password: password, function: () {
                               homePageService.lockDevice.value = false;
                               Navigator.pop(context);
                             });

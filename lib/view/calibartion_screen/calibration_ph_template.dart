@@ -10,14 +10,16 @@ SecureStorage storage = Get.put(SecureStorage());
 CalibrationService calibrationService = Get.put(CalibrationService());
 double sizeDevice = homePageService.sizeDevice.value;
 
-calibrationPHTemplate(BuildContext context,
-    {String realData = '',
-    double offsetValue = 0.0,
-    String offsetReal = '',
-    int number = 0,
-    bool calibZero = false,
-    bool calibSlopeLo = false,
-    bool calibSlopeHi = false}) {
+calibrationPHTemplate(
+  BuildContext context, {
+  String realData = '',
+  String offsetReal = '',
+  int number = 0,
+  bool calibZero = false,
+  bool calibSlopeLo = false,
+  bool calibSlopeHi = false,
+  // Function? function,
+}) {
   return Container(
     width: 1365 / sizeDevice,
     height: 580 / sizeDevice,
@@ -132,15 +134,9 @@ calibrationPHTemplate(BuildContext context,
                       alignment: Alignment.center,
                       child: Column(
                         children: [
-                          SizedBox(height: 9 / sizeDevice),
+                          SizedBox(height: 20 / sizeDevice),
                           Text(
                             "Offset",
-                            style: TextStyle(
-                                fontSize: 26 / sizeDevice,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "(-0.5 -> 0.5)",
                             style: TextStyle(
                                 fontSize: 26 / sizeDevice,
                                 fontWeight: FontWeight.bold),
@@ -159,9 +155,21 @@ calibrationPHTemplate(BuildContext context,
                               double.parse(text) > 0.5) {
                             PopupScreen().anounDialog(context);
                           } else {
-                            offsetValue = double.parse(text);
+                            switch (number) {
+                              case 5:
+                                homePageService.offsetpH1.value =
+                                    double.parse(text);
+                                break;
+                              case 6:
+                                homePageService.offsetpH2.value =
+                                    double.parse(text);
+                                break;
+                              case 7:
+                                homePageService.offsetpH3.value =
+                                    double.parse(text);
+                                break;
+                            }
                             storage.writeDataSetup(number);
-                            storage.readDataSetup(number);
                           }
                         },
                         decoration: InputDecoration(
@@ -346,5 +354,6 @@ calibrationPHTemplate(BuildContext context,
         ]),
       )
     ]),
+    // return
   );
 }

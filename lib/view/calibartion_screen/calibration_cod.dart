@@ -160,19 +160,19 @@ class _CalibrationCODState extends State<CalibrationCOD> {
                           alignment: Alignment.center,
                           child: Column(
                             children: [
-                              SizedBox(height: 9 / sizeDevice),
+                              SizedBox(height: 20 / sizeDevice),
                               Text(
                                 "Offset",
                                 style: TextStyle(
                                     fontSize: 26 / sizeDevice,
                                     fontWeight: FontWeight.bold),
                               ),
-                              Text(
-                                "(-2.0 -> 2.0)",
-                                style: TextStyle(
-                                    fontSize: 26 / sizeDevice,
-                                    fontWeight: FontWeight.bold),
-                              ),
+                              // Text(
+                              //   "(-2.0 -> 2.0)",
+                              //   style: TextStyle(
+                              //       fontSize: 26 / sizeDevice,
+                              //       fontWeight: FontWeight.bold),
+                              // ),
                             ],
                           ),
                         ),
@@ -190,7 +190,6 @@ class _CalibrationCODState extends State<CalibrationCOD> {
                                 homePageService.offsetCOD.value =
                                     double.parse(text);
                                 storage.writeDataSetup(8);
-                                storage.readDataSetup(8);
                               }
                             },
                             decoration: InputDecoration(

@@ -31,6 +31,7 @@ class SecureStorage extends GetxService {
       value: values[i],
       aOptions: _getAndroidOptions(),
     );
+    readOneDataSetup(i);
   }
 
   //read
@@ -39,6 +40,14 @@ class SecureStorage extends GetxService {
       key: homePageService.keySetup[i],
       aOptions: _getAndroidOptions(),
     ))!;
+  }
+
+  //read one
+  Future<void> readOneDataSetup(int k) async {
+    homePageService.mapSetup[homePageService.keySetup[k]] = (await storage.read(
+      key: homePageService.keySetup[k],
+      aOptions: _getAndroidOptions(),
+    ));
   }
 
   AndroidOptions _getAndroidOptions() => const AndroidOptions(

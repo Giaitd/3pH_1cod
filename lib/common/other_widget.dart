@@ -73,7 +73,7 @@ buttonMenuWidget(BuildContext context,
 dataRealtime(BuildContext context,
     {String name = '', String data = '', String donViDo = ''}) {
   return Container(
-    margin: EdgeInsets.only(top: 25 / sizeDevice),
+    margin: EdgeInsets.only(top: 20 / sizeDevice),
     decoration: const BoxDecoration(
       color: Colors.white,
       boxShadow: [
@@ -85,7 +85,7 @@ dataRealtime(BuildContext context,
       ],
       // borderRadius: BorderRadius.circular(8 / sizeDevice),
     ),
-    height: 90 / sizeDevice,
+    height: 80 / sizeDevice,
     width: 400 / sizeDevice,
     child: Row(children: [
       //tên
@@ -122,6 +122,33 @@ dataRealtime(BuildContext context,
               fontStyle: FontStyle.italic),
         ),
       ),
+    ]),
+  );
+}
+
+getIOState(BuildContext context, String title, {bool value = false}) {
+  return Container(
+    padding: EdgeInsets.fromLTRB(20 / sizeDevice, 0, 20 / sizeDevice, 0),
+    width: 630 / sizeDevice,
+    height: 40 / sizeDevice,
+    child: Row(children: [
+      Container(
+        margin: EdgeInsets.only(left: 5 / sizeDevice, right: 10 / sizeDevice),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.black),
+          color: value == true ? Colors.green : Colors.white,
+        ),
+        width: 25 / sizeDevice,
+        height: 25 / sizeDevice,
+      ),
+      Text(
+        title,
+        style: FlutterFlowTheme.of(context).subtitle2.override(
+              fontFamily: 'Roboto Mono',
+              color: Colors.black,
+              fontSize: 22 / sizeDevice,
+            ),
+      )
     ]),
   );
 }
