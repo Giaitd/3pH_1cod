@@ -14,6 +14,8 @@ public class Globals {
     public static Integer idNew = 10;
     public static Boolean btnSetId = false;
 
+    public static int delayPump = 30;
+
     //calibration
     public static Boolean pH1Zero = false;
     public static Boolean pH1SlopeLo = false;

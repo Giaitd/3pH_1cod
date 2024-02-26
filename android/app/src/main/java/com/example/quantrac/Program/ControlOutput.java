@@ -40,11 +40,19 @@ public class ControlOutput extends android.app.Service {
                             SetDO.bazo1Off(context);
                         }
 
-                        //bơm dinh duong
+                        //bơm dinh duong, may khuay
                         if (Globals.dIData.i0[2] && Globals.cod < Globals.codSet) {
-                            SetDO.pumpOn(context);
+                            SetDO.stirrerMotorOn(context);
+                            if (Globals.delayPump > 0) {
+                                Globals.delayPump--;
+                            } else {
+                                SetDO.pumpOn(context);
+                            }
+
                         } else if (!Globals.dIData.i0[2] || Globals.cod > (Globals.codSet + 0.5)) {
                             SetDO.pumpOff(context);
+                            SetDO.stirrerMotorOff(context);
+                            Globals.delayPump = 30;
                         }
                     }
                 });

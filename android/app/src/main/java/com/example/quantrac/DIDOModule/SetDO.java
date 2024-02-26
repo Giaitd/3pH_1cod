@@ -19,7 +19,7 @@ public class SetDO {
     public static byte[] bufferQ02On = {2, 5, 0, 2, -1, 0, 45, -55};    //bơm dinh duong on/off
     public static byte[] bufferQ02Off = {2, 5, 0, 2, 0, 0, 108, 57};
 
-    public static byte[] bufferQ03On = {2, 5, 0, 3, -1, 0, 124, 9};
+    public static byte[] bufferQ03On = {2, 5, 0, 3, -1, 0, 124, 9};     //động cơ khuấy dinh dưỡng
     public static byte[] bufferQ03Off = {2, 5, 0, 3, 0, 0, 61, -7};
 
     public static byte[] bufferQ04On = {2, 5, 0, 4, -1, 0, -51, -56};
@@ -106,7 +106,7 @@ public class SetDO {
         }
     }
 
-    //axit2 on/off
+    //bơm dinh duong on/off
     public static void pumpOn(Context context) {
         if (!Globals.dOData.q0[2]) {
             Globals.bufferAll = bufferQ02On;
@@ -117,6 +117,21 @@ public class SetDO {
     public static void pumpOff(Context context) {
         if (Globals.dOData.q0[2]) {
             Globals.bufferAll = bufferQ02Off;
+            writeDO(context);
+        }
+    }
+
+    //may khuay on/off
+    public static void stirrerMotorOn(Context context) {
+        if (!Globals.dOData.q0[3]) {
+            Globals.bufferAll = bufferQ03On;
+            writeDO(context);
+        }
+    }
+
+    public static void stirrerMotorOff(Context context) {
+        if (Globals.dOData.q0[3]) {
+            Globals.bufferAll = bufferQ03Off;
             writeDO(context);
         }
     }
