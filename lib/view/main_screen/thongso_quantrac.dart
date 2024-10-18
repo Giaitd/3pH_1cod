@@ -63,7 +63,7 @@ class _ThongSoQuanTracState extends State<ThongSoQuanTrac> {
             child: Column(children: [
               Padding(
                 padding: EdgeInsets.only(top: 20 / sizeDevice),
-                child: Text('Bể thiếu khí',
+                child: Text('Bể hiếu khí',
                     style: TextStyle(
                         fontSize: 35 / sizeDevice,
                         fontWeight: FontWeight.w600)),
@@ -71,11 +71,11 @@ class _ThongSoQuanTracState extends State<ThongSoQuanTrac> {
               dataRealtime(
                 context,
                 name: 'pH2',
-                data: "${homePageService.pH2.value}",
+                data: "${homePageService.pH3.value}",
               ),
               dataRealtime(context,
                   name: 'temp',
-                  data: "${homePageService.temp2.value}",
+                  data: "${homePageService.temp3.value}",
                   donViDo: 'oC')
             ]),
           ),
@@ -91,14 +91,14 @@ class _ThongSoQuanTracState extends State<ThongSoQuanTrac> {
             child: Column(children: [
               Padding(
                   padding: EdgeInsets.only(top: 20 / sizeDevice),
-                  child: Text('Bể hiếu khí',
+                  child: Text('Bể thiếu khí',
                       style: TextStyle(
                           fontSize: 35 / sizeDevice,
                           fontWeight: FontWeight.w600))),
               dataRealtime(
                 context,
                 name: 'pH3',
-                data: "${homePageService.pH3.value}",
+                data: "${homePageService.pH2.value}",
               ),
               dataRealtime(context,
                   name: 'COD',
@@ -106,7 +106,7 @@ class _ThongSoQuanTracState extends State<ThongSoQuanTrac> {
                   donViDo: 'mg/L'),
               dataRealtime(context,
                   name: 'temp',
-                  data: "${homePageService.temp3.value}",
+                  data: "${homePageService.temp2.value}",
                   donViDo: 'oC'),
               Container(height: 170 / sizeDevice),
               getIOState(context, 'Phao bồn dinh dưỡng',

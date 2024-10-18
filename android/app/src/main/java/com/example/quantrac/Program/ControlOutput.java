@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -26,34 +27,39 @@ public class ControlOutput extends android.app.Service {
                 mTimerHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        Globals.pHMid = (Globals.pHMinSet + Globals.pHMaxSet) / 2;
+                        try {
+                            Globals.pHMid = (Globals.pHMinSet + Globals.pHMaxSet) / 2;
 
-                        if (Globals.dIData.i0[0] && Globals.pH1 > Globals.pHMaxSet) {
-                            SetDO.axit1On(context);
-                        } else if (Globals.pH1 < (Globals.pHMid + 0.1) || !Globals.dIData.i0[0]) {
-                            SetDO.axit1Off(context);
-                        }
-
-                        if (Globals.dIData.i0[1] && Globals.pH1 < Globals.pHMinSet) {
-                            SetDO.bazo1On(context);
-                        } else if (Globals.pH1 > (Globals.pHMid - 0.1) || !Globals.dIData.i0[1]) {
-                            SetDO.bazo1Off(context);
-                        }
-
-                        //bơm dinh duong, may khuay
-                        if (Globals.dIData.i0[2] && Globals.cod < Globals.codSet) {
-                            SetDO.stirrerMotorOn(context);
-                            if (Globals.delayPump > 0) {
-                                Globals.delayPump--;
-                            } else {
-                                SetDO.pumpOn(context);
+                            if (Globals.dIData.i0[0] && Globals.pH1 > Globals.pHMaxSet) {
+                                SetDO.axit1On(context);
+                            } else if (Globals.pH1 < (Globals.pHMid + 0.1) || !Globals.dIData.i0[0]) {
+                                SetDO.axit1Off(context);
                             }
 
-                        } else if (!Globals.dIData.i0[2] || Globals.cod > (Globals.codSet + 0.5)) {
-                            SetDO.pumpOff(context);
-                            SetDO.stirrerMotorOff(context);
-                            Globals.delayPump = 30;
+                            if (Globals.dIData.i0[1] && Globals.pH1 < Globals.pHMinSet) {
+                                SetDO.bazo1On(context);
+                            } else if (Globals.pH1 > (Globals.pHMid - 0.1) || !Globals.dIData.i0[1]) {
+                                SetDO.bazo1Off(context);
+                            }
+
+                            //bơm dinh duong, may khuay
+                            if (Globals.dIData.i0[2] && Globals.cod < Globals.codSet) {
+                                SetDO.stirrerMotorOn(context);
+                                if (Globals.delayPump > 0) {
+                                    Globals.delayPump--;
+                                } else {
+                                    SetDO.pumpOn(context);
+                                }
+
+                            } else if (!Globals.dIData.i0[2] || Globals.cod > (Globals.codSet + 0.5)) {
+                                SetDO.pumpOff(context);
+                                SetDO.stirrerMotorOff(context);
+                                Globals.delayPump = 30;
+                            }
+                        } catch (Exception var8) {
+                            Log.d("response====", "loi o control output");
                         }
+
                     }
                 });
             }
