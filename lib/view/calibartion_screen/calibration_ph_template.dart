@@ -151,8 +151,8 @@ calibrationPHTemplate(
                         enabled: (!homePageService.lockDevice.value),
                         textAlign: TextAlign.center,
                         onChanged: (text) {
-                          if (double.parse(text) < -0.5 ||
-                              double.parse(text) > 0.5) {
+                          if (double.parse(text) < -5 ||
+                              double.parse(text) > 5) {
                             PopupScreen().anounDialog(context);
                           } else {
                             switch (number) {

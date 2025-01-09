@@ -73,34 +73,34 @@ public class SdkCodSensor {
             double codData;
             double tssData;
             //cod
-            byte[] bufferCod = new byte[]{1, 3, 32, 0, 0, 4, 79, -55}; // {01 03 20 00 00 04 4F C9}
+            byte[] bufferCod = new byte[]{1, 3, 0, 2, 0, 4, -27, -55}; // {01 03 00 02 00 04 E5 C9}
             this.usbSerialPort.write(bufferCod, this.WRITE_WAIT_MILLIS);
             byte[] bufferStatusCod = new byte[15];
             this.usbSerialPort.read(bufferStatusCod, this.READ_WAIT_MILLIS);
             checkReadCod = Utils.bytesToHex(new byte[]{bufferStatusCod[0], bufferStatusCod[1], bufferStatusCod[2]});
 
 
-            //bod
-            byte[] bufferBod = new byte[]{1, 3, 32, 4, 0, 2, -114, 10}; // {01 03 20 04 00 02 8E 0A}
-            this.usbSerialPort.write(bufferBod, this.WRITE_WAIT_MILLIS);
-            byte[] bufferStatusBod = new byte[11];
-            this.usbSerialPort.read(bufferStatusBod, this.READ_WAIT_MILLIS);
-            checkReadBod = Utils.bytesToHex(new byte[]{bufferStatusBod[0], bufferStatusBod[1], bufferStatusBod[2]});
-
-
-            //tss
-            byte[] bufferTss = new byte[]{1, 3, 33, 0, 0, 2, -50, 55}; // {01 03 21 00 00 02 CE 37}
-            this.usbSerialPort.write(bufferTss, this.WRITE_WAIT_MILLIS);
-            byte[] bufferStatusTss = new byte[11];
-            this.usbSerialPort.read(bufferStatusTss, this.READ_WAIT_MILLIS);
-            checkReadTss = Utils.bytesToHex(new byte[]{bufferStatusTss[0], bufferStatusTss[1], bufferStatusTss[2]});
+//            //bod
+//            byte[] bufferBod = new byte[]{1, 3, 32, 4, 0, 2, -114, 10}; // {01 03 20 04 00 02 8E 0A}
+//            this.usbSerialPort.write(bufferBod, this.WRITE_WAIT_MILLIS);
+//            byte[] bufferStatusBod = new byte[11];
+//            this.usbSerialPort.read(bufferStatusBod, this.READ_WAIT_MILLIS);
+//            checkReadBod = Utils.bytesToHex(new byte[]{bufferStatusBod[0], bufferStatusBod[1], bufferStatusBod[2]});
+//
+//
+//            //tss
+//            byte[] bufferTss = new byte[]{1, 3, 33, 0, 0, 2, -50, 55}; // {01 03 21 00 00 02 CE 37}
+//            this.usbSerialPort.write(bufferTss, this.WRITE_WAIT_MILLIS);
+//            byte[] bufferStatusTss = new byte[11];
+//            this.usbSerialPort.read(bufferStatusTss, this.READ_WAIT_MILLIS);
+//            checkReadTss = Utils.bytesToHex(new byte[]{bufferStatusTss[0], bufferStatusTss[1], bufferStatusTss[2]});
 
 
             // đọc giá trị COD
             if (checkReadCod.equals("010308") && checkReadBod.equals("010304")) {
 
                 //đọc Cod
-                String codString = Utils.bytesToHex(new byte[]{bufferStatusCod[10], bufferStatusCod[9], bufferStatusCod[8], bufferStatusCod[7]});
+                String codString = Utils.bytesToHex(new byte[]{bufferStatusCod[5], bufferStatusCod[6], bufferStatusCod[3], bufferStatusCod[4]});
                 String dataReceiveCod = "";
                 for (int i = 0; i < codString.length(); i++) {
                     int k = Integer.parseInt(String.valueOf(codString.charAt(i)), 16);
@@ -260,7 +260,7 @@ public class SdkCodSensor {
     //turn on the brush
     public void turnOnTheBrush() {
         try {
-            byte[] buffer = new byte[]{1, 16, 19, 0, 0, 0, 0, -116, -109}; //{01,10,13,00,00,00,00,8C,93}
+            byte[] buffer = new byte[]{1, 6, 0, 38, 0, 1, -87, -63}; //{01,06,00,26,00,01,A9,C1}
             this.usbSerialPort.write(buffer, this.WRITE_WAIT_MILLIS);
             byte[] bufferStatus = new byte[9];
             this.usbSerialPort.read(bufferStatus, this.READ_WAIT_MILLIS);

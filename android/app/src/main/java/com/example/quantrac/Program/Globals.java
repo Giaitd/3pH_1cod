@@ -39,8 +39,22 @@ public class Globals {
 
 
     // module di-do
-    public static DIData dIData = null;
-    public static DOData dOData = null;
+    public static DIData dIData = new DIData(
+            new boolean[8],
+            new boolean[8],
+            new boolean[8],
+            0,
+            0,
+            0
+    );
+    public static DOData dOData = new DOData(
+            new boolean[8],
+            new boolean[8],
+            new boolean[8],
+            0,
+            0,
+            0
+    );
     public static byte[] bufferAll = null;
 
     public static PHData getPH1Data = null;

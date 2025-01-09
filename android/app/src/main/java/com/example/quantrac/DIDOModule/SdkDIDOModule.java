@@ -99,12 +99,26 @@ public class SdkDIDOModule {
 
             } else {
                 this.disconnect();
-                return null;
+                return new DIData(
+                        new boolean[8],
+                        new boolean[8],
+                        new boolean[8],
+                        0,
+                        0,
+                        0
+                );
             }
         } catch (IOException var14) {
             var14.printStackTrace();
             this.disconnect();
-            return null;
+            return new DIData(
+                    new boolean[8],
+                    new boolean[8],
+                    new boolean[8],
+                    0,
+                    0,
+                    0
+            );
         }
     }
 
@@ -149,12 +163,26 @@ public class SdkDIDOModule {
                 return new DOData(q0,q1,q2,valueDO0,valueDO1,valueDO2);
             } else {
                 this.disconnect();
-                return null;
+                return new DOData(
+                        new boolean[8],
+                        new boolean[8],
+                        new boolean[8],
+                        0,
+                        0,
+                        0
+                );
             }
         } catch (IOException var14) {
             var14.printStackTrace();
             this.disconnect();
-            return null;
+            return new DOData(
+                    new boolean[8],
+                    new boolean[8],
+                    new boolean[8],
+                    0,
+                    0,
+                    0
+            );
         }
     }
 
