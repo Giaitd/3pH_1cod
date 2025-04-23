@@ -28,9 +28,6 @@ public class ReadPH {
                             if (SdkPHModule.checkReadPH.equals("060308")) {
                                 Globals.pH1 = Math.round((Globals.getPH1Data.pH + Globals.offsetPH1) * 100) / 100.0;
                                 Globals.temp1 = Globals.getPH1Data.temp;
-                            } else {
-                                Globals.pH1 = 0.00;
-                                Globals.temp1 = 0.0;
                             }
                         }
 
@@ -40,9 +37,6 @@ public class ReadPH {
                             if (SdkPHModule.checkReadPH.equals("070308")) {
                                 Globals.pH2 = Math.round((Globals.getPH2Data.pH + Globals.offsetPH2) * 100) / 100.0;
                                 Globals.temp2 = Globals.getPH2Data.temp;
-                            } else {
-                                Globals.pH2 = 0.00;
-                                Globals.temp2 = 0.0;
                             }
                         }
 
@@ -52,9 +46,6 @@ public class ReadPH {
                             if (SdkPHModule.checkReadPH.equals("080308")) {
                                 Globals.pH3 = Math.round((Globals.getPH3Data.pH + Globals.offsetPH3) * 100) / 100.0;
                                 Globals.temp3 = Globals.getPH3Data.temp;
-                            } else {
-                                Globals.pH3 = 0.00;
-                                Globals.temp3 = 0.0;
                             }
                         }
                     }

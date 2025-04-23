@@ -97,7 +97,7 @@ public class SdkCodSensor {
 
 
             // đọc giá trị COD
-            if (checkReadCod.equals("010308") && checkReadBod.equals("010304")) {
+            if (checkReadCod.equals("010308") ) {
 
                 //đọc Cod
                 String codString = Utils.bytesToHex(new byte[]{bufferStatusCod[5], bufferStatusCod[6], bufferStatusCod[3], bufferStatusCod[4]});
